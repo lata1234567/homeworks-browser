@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.HomeworkRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -16,6 +17,13 @@ public class HomeworkService {
 
     public HomeworkService(HomeworkRepository homeworkRepository) {
         this.homeworkRepository = homeworkRepository;
+    }
+
+    public List<HomeworkEntity> list(){
+        LOGGER.info("list()");
+        List<HomeworkEntity> entities = homeworkRepository.findAll();
+
+        return entities;
     }
 
     public HomeworkEntity create(HomeworkEntity homeworkEntity) {
