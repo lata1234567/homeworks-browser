@@ -3,11 +3,14 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity;
 import javax.persistence.*;
 
 @Entity
-public class ClassEntity {
+public class StudentEntity {
     @Id
     @GeneratedValue
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ClassNameEntity name;
+    @OneToOne
+    private ClassEntity clazz;
+
+    private String name;
+    private String surname;
 }
