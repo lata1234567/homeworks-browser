@@ -19,7 +19,7 @@ public class HomeworkService {
         this.homeworkRepository = homeworkRepository;
     }
 
-    public List<HomeworkEntity> list(){
+    public List<HomeworkEntity> list() {
         LOGGER.info("list()");
         List<HomeworkEntity> entities = homeworkRepository.findAll();
 
