@@ -27,7 +27,7 @@ class HomeworkRepositoryTest {
     }
 
     @Test
-    @Rollback(false)
+//    @Rollback(false)
     void given_when_then1(){
         //Given
         HomeworkEntity homeworkEntity = new HomeworkEntity();
