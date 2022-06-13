@@ -2,8 +2,9 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.Hom
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
@@ -40,13 +42,15 @@ public class HomeworkController {
         return createdHomeworkEntity;
     }
 
-    @GetMapping
-    void read() {
+    @GetMapping(value = "/{id}")
+    public Optional<HomeworkEntity> read(@PathVariable("id") Long id) {
         LOGGER.info("read()");
-//        homeworkService.read();
+        Optional<HomeworkEntity> optionalHomeworkEntity = homeworkService.read(id);
+
+        return optionalHomeworkEntity;
     }
 
-    @PatchMapping
+    @PutMapping
     public HomeworkEntity update(@RequestBody HomeworkEntity homeworkEntity) {
         LOGGER.info("update()");
         HomeworkEntity updatedHomeworkEntity = homeworkService.update(homeworkEntity);
