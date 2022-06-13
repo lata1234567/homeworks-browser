@@ -38,6 +38,7 @@ public class HomeworkService {
         LOGGER.info("read(" + id + ")");
 
         Optional<HomeworkEntity> readHomeworkEntity = homeworkRepository.findById(id);
+        LOGGER.info("readHomeworkEntity: " + readHomeworkEntity);
 
         return readHomeworkEntity;
     }
