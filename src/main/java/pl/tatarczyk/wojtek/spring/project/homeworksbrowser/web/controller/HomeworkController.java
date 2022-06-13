@@ -1,6 +1,8 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,20 +40,21 @@ public class HomeworkController {
         return createdHomeworkEntity;
     }
 
-    //    @GetMapping
+    @GetMapping
     void read() {
         LOGGER.info("read()");
 //        homeworkService.read();
     }
 
-    //    @GetMapping
-    public HomeworkEntity update() {
+    @PatchMapping
+    public HomeworkEntity update(@RequestBody HomeworkEntity homeworkEntity) {
         LOGGER.info("update()");
-        HomeworkEntity updatedHomeworkEntity = homeworkService.update(new HomeworkEntity());
+        HomeworkEntity updatedHomeworkEntity = homeworkService.update(homeworkEntity);
 
         return updatedHomeworkEntity;
     }
 
+    @DeleteMapping
     void delete() {
         LOGGER.info("delete()");
 //        homeworkService.delete();
