@@ -11,5 +11,3 @@ public class HomeworksBrowserApplication {
 	}
 
 }
-// TODO: 23.05.2022 uzupełmić pola dla pozostałych entity (enumy jeśli znany stały () elementów zbór )
-//wprowadzane zmiany umieścić na nowym branczu i zrobić pull request w git hub
