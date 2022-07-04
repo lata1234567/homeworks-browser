@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,11 +36,11 @@ public class HomeworkController {
     }
 
     @PostMapping
-    public HomeworkEntity create(@RequestBody HomeworkEntity homeworkEntity) {
-        LOGGER.info("create(" + homeworkEntity + ")");
-        HomeworkEntity createdHomeworkEntity = homeworkService.create(homeworkEntity);
+    public HomeworkModel create(@RequestBody HomeworkModel homeworkModel) {
+        LOGGER.info("create(" + homeworkModel + ")");
+        HomeworkModel createdHomeworkModel = homeworkService.create(homeworkModel);
 
-        return createdHomeworkEntity;
+        return createdHomeworkModel;
     }
 
     @GetMapping(value = "/{id}")
