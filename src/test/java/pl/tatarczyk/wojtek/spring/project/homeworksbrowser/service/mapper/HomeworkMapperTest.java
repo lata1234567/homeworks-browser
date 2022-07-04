@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class HomeworkMapperTest {
@@ -29,5 +32,22 @@ class HomeworkMapperTest {
                 () -> assertEquals(HOMEWORK_TITLE, homeworkEntity.getTitle(), "homeworkModel TITLE is not equals")
 
         );
+    }
+
+    @Test
+    void testFrom() {
+        //Given
+        List<HomeworkModel> homeworkModels = new ArrayList<>();
+        homeworkModels.add(new HomeworkModel());
+        homeworkModels.add(new HomeworkModel());
+        //When
+        List<HomeworkEntity> homeworkEntities = homeworkMapper.from(homeworkModels);
+        //Then
+        assertAll(
+                () -> assertNotNull(homeworkEntities, "homeworkEntities is null"),
+                () -> assertEquals(homeworkModels.size(), homeworkEntities.size(),"models and entities size is not equals")
+        );
+
+
     }
 }

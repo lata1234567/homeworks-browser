@@ -3,12 +3,20 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class HomeworkMapper {
 
     private static final Logger LOGGER = Logger.getLogger(HomeworkMapper.class.getName());
 
+    public List<HomeworkEntity> from(List<HomeworkModel> homeworkModels) {
+        LOGGER.info("from(" + homeworkModels + ")");
+        return homeworkModels.stream()
+                .map(this::from)
+                .collect(Collectors.toList());
+    }
 
     public HomeworkEntity from(HomeworkModel homeworkModel) {
         LOGGER.info("from(" + homeworkModel + ")");
@@ -29,7 +37,7 @@ public class HomeworkMapper {
         homeworkModel.setId(homeworkEntity.getId());
         homeworkModel.setTitle(homeworkEntity.getTitle());
 
-        LOGGER.info("from(...) = "+homeworkModel);
+        LOGGER.info("from(...) = " + homeworkModel);
 
         return homeworkModel;
     }
