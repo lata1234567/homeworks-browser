@@ -7,7 +7,9 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkMod
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class HomeworkMapperTest {
 
@@ -41,7 +43,7 @@ class HomeworkMapperTest {
         homeworkModels.add(new HomeworkModel());
         homeworkModels.add(new HomeworkModel());
         //When
-        List<HomeworkEntity> homeworkEntities = homeworkMapper.from(homeworkModels);
+        List<HomeworkEntity> homeworkEntities = homeworkMapper.fromModels(homeworkModels);
         //Then
         assertAll(
                 () -> assertNotNull(homeworkEntities, "homeworkEntities is null"),

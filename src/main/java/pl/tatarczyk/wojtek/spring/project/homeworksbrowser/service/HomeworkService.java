@@ -23,11 +23,11 @@ public class HomeworkService {
         this.homeworkMapper = homeworkMapper;
     }
 
-    public List<HomeworkEntity> list() {
+    public List<HomeworkModel> list() {
         LOGGER.info("list()");
         List<HomeworkEntity> entities = homeworkRepository.findAll();
 
-        return entities;
+        return homeworkMapper.fromEntities(entities);
     }
 
     public HomeworkModel create(HomeworkModel homeworkModel) {
@@ -35,33 +35,35 @@ public class HomeworkService {
 
         HomeworkEntity mappedEntity = homeworkMapper.from(homeworkModel);
         HomeworkEntity savedHomeworkEntity = homeworkRepository.save(mappedEntity);
-        HomeworkModel mappedHomeworkModel = homeworkMapper.from(savedHomeworkEntity);
 
-        return mappedHomeworkModel;
+        return homeworkMapper.from(savedHomeworkEntity);
     }
 
     public Optional<HomeworkEntity> read(Long id) {
         LOGGER.info("read(" + id + ")");
 
         Optional<HomeworkEntity> readHomeworkEntity = homeworkRepository.findById(id);
+//        homeworkMapper.from(readHomeworkEntity);
         LOGGER.info("readHomeworkEntity: " + readHomeworkEntity);
 
-        return readHomeworkEntity;
+        return null;
     }
 
-    public HomeworkEntity update(HomeworkEntity homeworkEntity) {
-        LOGGER.info("update(" + homeworkEntity + ")");
+    public HomeworkModel update(HomeworkModel homeworkModel) {
+        LOGGER.info("update(" + homeworkModel + ")");
 
-        HomeworkEntity updateHomeworkEntity = homeworkRepository.save(homeworkEntity);
+        HomeworkEntity mappedHomeworkEntity = homeworkMapper.from(homeworkModel);
+        HomeworkEntity updateHomeworkEntity = homeworkRepository.save(mappedHomeworkEntity);
 
-        return updateHomeworkEntity;
+        return homeworkMapper.from(updateHomeworkEntity);
     }
 
-    public void delete(HomeworkEntity homeworkEntity) {
+    public void delete(HomeworkModel homeworkModel) {
         LOGGER.info("delete()");
 
-        homeworkRepository.delete(homeworkEntity);
+        HomeworkEntity mappedHomeworkEntity = homeworkMapper.from(homeworkModel);
+        homeworkRepository.delete(mappedHomeworkEntity);
     }
 }
 
-// TODO: 04.07.2022 wzorując się na metodzie create pozmieniać typy entity na model
+// TODO: 04.07.2022 wzorując się na metodzie create pozmieniać typy entity na model                                                                                    m   m mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkjJj32

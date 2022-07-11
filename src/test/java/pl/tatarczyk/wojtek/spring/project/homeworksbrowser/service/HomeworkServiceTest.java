@@ -29,7 +29,7 @@ class HomeworkServiceTest {
     @Test
     void read() {
         //Given
-        Long id = null;
+        Long id = 1L;
         //When
         Optional<HomeworkEntity> readHomeworkEntity = homeworkService.read(id);
         //Then
@@ -40,11 +40,11 @@ class HomeworkServiceTest {
     @Test
     void update() {
         //Given
-        HomeworkEntity homeworkEntity = new HomeworkEntity();
+        HomeworkModel homeworkModel = new HomeworkModel();
         //When
-        HomeworkEntity updateHomeworkEntity = homeworkService.update(homeworkEntity);
+        HomeworkModel updatedHomeworkModel = homeworkService.update(homeworkModel);
         //Then
-        Assertions.assertNotNull(updateHomeworkEntity, "updateHomeworkEntity is null");
+        Assertions.assertNotNull(updatedHomeworkModel, "updateHomeworkEntity is null");
 
     }
 }

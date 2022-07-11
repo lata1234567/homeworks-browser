@@ -13,9 +13,16 @@ public class HomeworkMapper {
 
     private static final Logger LOGGER = Logger.getLogger(HomeworkMapper.class.getName());
 
-    public List<HomeworkEntity> from(List<HomeworkModel> homeworkModels) {
-        LOGGER.info("from(" + homeworkModels + ")");
+    public List<HomeworkEntity> fromModels(List<HomeworkModel> homeworkModels) {
+        LOGGER.info("fromModels(" + homeworkModels + ")");
         return homeworkModels.stream()
+                .map(this::from)
+                .collect(Collectors.toList());
+    }
+
+    public List<HomeworkModel> fromEntities(List<HomeworkEntity> homeworkEntities) {
+        LOGGER.info("fromEntities(" + homeworkEntities + ")");
+        return homeworkEntities.stream()
                 .map(this::from)
                 .collect(Collectors.toList());
     }

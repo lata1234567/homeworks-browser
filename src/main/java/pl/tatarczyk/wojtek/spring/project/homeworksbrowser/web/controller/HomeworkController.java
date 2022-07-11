@@ -29,34 +29,30 @@ public class HomeworkController {
     }
 
     @GetMapping
-    public List<HomeworkEntity> list() {
+    public List<HomeworkModel> list() {
         LOGGER.info("list()");
-        List<HomeworkEntity> entities = homeworkService.list();
-        return entities;
+        return homeworkService.list();
     }
 
     @PostMapping
     public HomeworkModel create(@RequestBody HomeworkModel homeworkModel) {
         LOGGER.info("create(" + homeworkModel + ")");
-        HomeworkModel createdHomeworkModel = homeworkService.create(homeworkModel);
 
-        return createdHomeworkModel;
+        return homeworkService.create(homeworkModel);
     }
 
     @GetMapping(value = "/{id}")
     public Optional<HomeworkEntity> read(@PathVariable("id") Long id) {
         LOGGER.info("read()");
-        Optional<HomeworkEntity> optionalHomeworkEntity = homeworkService.read(id);
 
-        return optionalHomeworkEntity;
+        return homeworkService.read(id);
     }
 
     @PutMapping
-    public HomeworkEntity update(@RequestBody HomeworkEntity homeworkEntity) {
+    public HomeworkModel update(@RequestBody HomeworkModel homeworkModel) {
         LOGGER.info("update()");
-        HomeworkEntity updatedHomeworkEntity = homeworkService.update(homeworkEntity);
 
-        return updatedHomeworkEntity;
+        return homeworkService.update(homeworkModel);
     }
 
     @DeleteMapping
