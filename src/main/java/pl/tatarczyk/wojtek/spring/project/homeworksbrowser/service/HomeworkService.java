@@ -1,6 +1,7 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service;
 
 import org.springframework.stereotype.Service;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.HomeworkRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.HomeworkMapper;
@@ -39,14 +40,16 @@ public class HomeworkService {
         return homeworkMapper.from(savedHomeworkEntity);
     }
 
-    public Optional<HomeworkEntity> read(Long id) {
+    public HomeworkModel read(Long id) throws HomeworkNotFoundException {
         LOGGER.info("read(" + id + ")");
 
-        Optional<HomeworkEntity> readHomeworkEntity = homeworkRepository.findById(id);
-//        homeworkMapper.from(readHomeworkEntity);
-        LOGGER.info("readHomeworkEntity: " + readHomeworkEntity);
+        Optional<HomeworkEntity> optionalHomeworkEntity = homeworkRepository.findById(id);
+        HomeworkEntity homeworkEntity = optionalHomeworkEntity.orElseThrow(
+                () -> new HomeworkNotFoundException("Not found homework with id " + id));
+        HomeworkModel homeworkModel = homeworkMapper.from(homeworkEntity);
+        LOGGER.info("optionalHomeworkEntity: " + optionalHomeworkEntity);
 
-        return null;
+        return homeworkModel;
     }
 
     public HomeworkModel update(HomeworkModel homeworkModel) {

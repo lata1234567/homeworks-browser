@@ -4,10 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
-
-import java.util.Optional;
 
 @SpringBootTest
 class HomeworkServiceTest {
@@ -21,7 +19,7 @@ class HomeworkServiceTest {
         //When
         HomeworkModel createdHomeworkModel = homeworkService.create(homeworkModel);
         //Then
-        Assertions.assertNotNull(createdHomeworkModel,"createdHomeworkModel is null");
+        Assertions.assertNotNull(createdHomeworkModel, "createdHomeworkModel is null");
 
 
     }
@@ -31,9 +29,10 @@ class HomeworkServiceTest {
         //Given
         Long id = 1L;
         //When
-        Optional<HomeworkEntity> readHomeworkEntity = homeworkService.read(id);
+//        HomeworkModel readHomeworkModel = homeworkService.read(id);
         //Then
-        Assertions.assertNotNull(readHomeworkEntity, "readHomeworkEntity is null");
+//        Assertions.assertNotNull(readHomeworkModel, "readHomeworkModel is null");
+        Assertions.assertThrows(HomeworkNotFoundException.class, () -> homeworkService.read(id));
 
     }
 
