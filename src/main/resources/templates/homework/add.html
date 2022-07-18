@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymelaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new homework</title>
+</head>
+<body>
+<div>
+  <h1>Create new homework</h1>
+    <form action="/homeworks" th:object="${homeworkModel}" method="post">
+        <div>
+            <label for="title">title</label>
+            <input type="text" id="title" name="title"/>
+        </div>
+
+        <div>
+            <label for="content">content</label>
+            <input type="text" id="content" name="content"/>
+        </div>
+
+        <div>
+            <label for="dueDate">dueDate</label>
+            <input type="text" id="dueDate" name="dueDate"/>
+        </div>
+
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,13 +1,14 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
@@ -15,15 +16,15 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkMod
 import java.util.List;
 import java.util.logging.Logger;
 
-@RestController
-@RequestMapping(value = "/api/homeworks")
-public class HomeworkController {
+@Controller
+@RequestMapping(value = "/homeworks")
+public class HomeworkWebController {
 
-    private static final Logger LOGGER = Logger.getLogger(HomeworkController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HomeworkWebController.class.getName());
 
     private HomeworkService homeworkService;
 
-    public HomeworkController(HomeworkService homeworkService) {
+    public HomeworkWebController(HomeworkService homeworkService) {
         this.homeworkService = homeworkService;
     }
 
@@ -33,11 +34,19 @@ public class HomeworkController {
         return homeworkService.list();
     }
 
+    @GetMapping(value = "/create")
+    public String createView() {
+        return "homework/add";
+        // TODO: 11.07.2022 stworzyć html z formularzem umożliwiającym dodanie nowej pracy domowej (wzorować sięna instniejącym kodzie) 
+    }
+
     @PostMapping
-    public HomeworkModel create(@RequestBody HomeworkModel homeworkModel) {
+    public String create(@ModelAttribute HomeworkModel homeworkModel) {
         LOGGER.info("create(" + homeworkModel + ")");
 
-        return homeworkService.create(homeworkModel);
+        homeworkService.create(homeworkModel);
+
+        return "redirect:/homeworks/create";
     }
 
     @GetMapping(value = "/{id}")
