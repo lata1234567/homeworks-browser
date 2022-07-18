@@ -34,6 +34,7 @@ public class HomeworkMapper {
 
         homeworkEntity.setId(homeworkModel.getId());
         homeworkEntity.setTitle(homeworkModel.getTitle());
+        homeworkEntity.setContent(homeworkModel.getContent());
 
         LOGGER.info("from(...) = " + homeworkEntity);
         return homeworkEntity;

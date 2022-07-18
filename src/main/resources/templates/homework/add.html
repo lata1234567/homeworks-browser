@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymelaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create new homework</title>
@@ -7,7 +7,7 @@
 <body>
 <div>
   <h1>Create new homework</h1>
-    <form action="/homeworks" method="post">
+    <form action="/homeworks" th:object="${homeworkModel}" method="post">
         <div>
             <label for="title">title</label>
             <input type="text" id="title" name="title"/>
