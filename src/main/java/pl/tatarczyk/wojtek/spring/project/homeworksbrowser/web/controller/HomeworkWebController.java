@@ -13,7 +13,6 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.Homewor
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -29,15 +28,15 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public List<HomeworkModel> list() {
+    public String list() {
         LOGGER.info("list()");
-        return homeworkService.list();
+//        homeworkService.list();
+        return "homeworks/list";
     }
 
     @GetMapping(value = "/create")
     public String createView() {
-        return "homework/add";
-        // TODO: 11.07.2022 stworzyć html z formularzem umożliwiającym dodanie nowej pracy domowej (wzorować sięna instniejącym kodzie) 
+        return "homeworks/add";
     }
 
     @PostMapping

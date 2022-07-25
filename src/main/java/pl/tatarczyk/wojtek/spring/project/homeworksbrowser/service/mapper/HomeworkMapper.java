@@ -1,5 +1,6 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
@@ -30,11 +31,13 @@ public class HomeworkMapper {
     public HomeworkEntity from(HomeworkModel homeworkModel) {
         LOGGER.info("from(" + homeworkModel + ")");
 
-        HomeworkEntity homeworkEntity = new HomeworkEntity();
+//        HomeworkEntity homeworkEntity = new HomeworkEntity();
+        ModelMapper modelMapper = new ModelMapper();
+        HomeworkEntity homeworkEntity = modelMapper.map(homeworkModel, HomeworkEntity.class);
 
-        homeworkEntity.setId(homeworkModel.getId());
-        homeworkEntity.setTitle(homeworkModel.getTitle());
-        homeworkEntity.setContent(homeworkModel.getContent());
+//        homeworkEntity.setId(homeworkModel.getId());
+//        homeworkEntity.setTitle(homeworkModel.getTitle());
+//        homeworkEntity.setContent(homeworkModel.getContent());
 
         LOGGER.info("from(...) = " + homeworkEntity);
         return homeworkEntity;
@@ -42,10 +45,12 @@ public class HomeworkMapper {
 
     public HomeworkModel from(HomeworkEntity homeworkEntity) {
         LOGGER.info("from(" + homeworkEntity + ")");
-        HomeworkModel homeworkModel = new HomeworkModel();
+//        HomeworkModel homeworkModel = new HomeworkModel();
+        ModelMapper modelMapper = new ModelMapper();
+        HomeworkModel homeworkModel = modelMapper.map(homeworkEntity, HomeworkModel.class);
 
-        homeworkModel.setId(homeworkEntity.getId());
-        homeworkModel.setTitle(homeworkEntity.getTitle());
+//        homeworkModel.setId(homeworkEntity.getId());
+//        homeworkModel.setTitle(homeworkEntity.getTitle());
 
         LOGGER.info("from(...) = " + homeworkModel);
 
@@ -54,7 +59,5 @@ public class HomeworkMapper {
 
 }
 
-
-// TODO: 13.06.2022 dopisać metode która zmienia z entity na model
-// dopisać metode która zamienia listę modeli na listę encji (użyć strumieni i lambd)
-// przepisać zmienne z entity do modeli
+// TODO: 18.07.2022 poprawić homeworkmapper by używał Mdoelmapper,
+// w controlerze HomeworkWebControler dodać obsługę wyświetlania listy prac domowych (odpowiedni end point + nowy html)

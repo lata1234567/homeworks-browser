@@ -15,6 +15,7 @@ class HomeworkMapperTest {
 
     public static final long HOMEWORK_ID = 1L;
     public static final String HOMEWORK_TITLE = "Title";
+    private static final String HOMEWORK_CONTENT = "Content";
     HomeworkMapper homeworkMapper = new HomeworkMapper();
 
     @Test
@@ -23,6 +24,7 @@ class HomeworkMapperTest {
         HomeworkModel homeworkModel = new HomeworkModel();
         homeworkModel.setId(HOMEWORK_ID);
         homeworkModel.setTitle(HOMEWORK_TITLE);
+        homeworkModel.setContent(HOMEWORK_CONTENT);
 
         //When
         HomeworkEntity homeworkEntity = homeworkMapper.from(homeworkModel);
@@ -31,8 +33,8 @@ class HomeworkMapperTest {
         assertAll(
                 () -> assertNotNull(homeworkEntity, "homeworkEntity is null"),
                 () -> assertEquals(HOMEWORK_ID, homeworkEntity.getId(), "homeworkModel ID is not equals"),
-                () -> assertEquals(HOMEWORK_TITLE, homeworkEntity.getTitle(), "homeworkModel TITLE is not equals")
-
+                () -> assertEquals(HOMEWORK_TITLE, homeworkEntity.getTitle(), "homeworkModel TITLE is not equals"),
+                () -> assertEquals(HOMEWORK_CONTENT, homeworkEntity.getContent(), "homeworkModel CONTENT is not equals")
         );
     }
 
