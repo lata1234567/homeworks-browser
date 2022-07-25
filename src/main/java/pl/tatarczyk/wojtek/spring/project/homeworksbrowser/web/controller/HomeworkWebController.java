@@ -1,6 +1,7 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.Homewor
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -28,9 +30,10 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public String list() {
+    public String list(Model model) {
         LOGGER.info("list()");
-//        homeworkService.list();
+        List<HomeworkModel> homeworks = homeworkService.list();
+        model.addAttribute("homeworks", homeworks);
         return "homeworks/list";
     }
 
