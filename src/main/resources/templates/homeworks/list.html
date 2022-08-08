@@ -7,11 +7,43 @@
 <body>
 <div>
     <h1>List of Homeworks</h1>
-    <div>
-        <div th:each="homework : ${homeworks}">
-            <span th:text="${homework.title}"></span>
-        </div>
-    </div>
+<!--    <div>-->
+<!--        <div th:each="homework : ${homeworks}">-->
+<!--            <span th:text="${homework.title}"></span>-->
+<!--            <span th:text="${homework.content}"></span>-->
+<!--            <span th:text="${homework.dueDate}"></span>-->
+<!--        </div>-->
+<!--    </div>-->
+    <h3>Table of Homeworks</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Due date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="homework : ${homeworks}">
+            <th scope="row">1</th>
+            <td th:text="${homework.title}"></td>
+            <td th:text="${homework.content}"></td>
+            <td th:text="${homework.dueDate}"></td>
+        </tr>
+<!--        <tr>-->
+<!--            <th scope="row">2</th>-->
+<!--            <td>Jacob</td>-->
+<!--            <td>Thornton</td>-->
+<!--            <td>@fat</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th scope="row">3</th>-->
+<!--            <td colspan="2">Larry the Bird</td>-->
+<!--            <td>@twitter</td>-->
+<!--        </tr>-->
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
