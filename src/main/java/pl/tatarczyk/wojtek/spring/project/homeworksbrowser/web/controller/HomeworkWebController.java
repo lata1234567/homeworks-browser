@@ -2,7 +2,6 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,11 +64,12 @@ public class HomeworkWebController {
         return homeworkService.update(homeworkModel);
     }
 
-    @DeleteMapping
-    void delete() {
+    @GetMapping(value = "/delete/{id}")
+    public String delete(@PathVariable("id") Long id) {
         LOGGER.info("delete()");
-//        homeworkService.delete();
+        homeworkService.delete(id);
+        return "redirect:/homeworks";
     }
 }
 
-// TODO: 25.07.2022 comit :)
+// TODO: 08.08.2022 zaimplementować metode update zanalogicznie do metody delete

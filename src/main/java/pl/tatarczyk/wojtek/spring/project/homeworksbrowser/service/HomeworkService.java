@@ -61,12 +61,8 @@ public class HomeworkService {
         return homeworkMapper.from(updateHomeworkEntity);
     }
 
-    public void delete(HomeworkModel homeworkModel) {
-        LOGGER.info("delete()");
-
-        HomeworkEntity mappedHomeworkEntity = homeworkMapper.from(homeworkModel);
-        homeworkRepository.delete(mappedHomeworkEntity);
+    public void delete(Long id) {
+        LOGGER.info("delete(" + id + ")");
+        homeworkRepository.deleteById(id);
     }
 }
-
-// TODO: 04.07.2022 wzorując się na metodzie create pozmieniać typy entity na model                                                                                    m   m mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkjJj32
