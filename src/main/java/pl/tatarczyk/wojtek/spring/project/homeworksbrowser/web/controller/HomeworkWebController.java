@@ -1,6 +1,7 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,15 +30,16 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public List<HomeworkModel> list() {
+    public String list(Model model) {
         LOGGER.info("list()");
-        return homeworkService.list();
+        List<HomeworkModel> homeworks = homeworkService.list();
+        model.addAttribute("homeworks", homeworks);
+        return "homeworks/list";
     }
 
     @GetMapping(value = "/create")
     public String createView() {
-        return "homework/add";
-        // TODO: 11.07.2022 stworzyć html z formularzem umożliwiającym dodanie nowej pracy domowej (wzorować sięna instniejącym kodzie) 
+        return "homeworks/add";
     }
 
     @PostMapping
@@ -46,7 +48,7 @@ public class HomeworkWebController {
 
         homeworkService.create(homeworkModel);
 
-        return "redirect:/homeworks/create";
+        return "redirect:/homeworks";
     }
 
     @GetMapping(value = "/{id}")
@@ -70,3 +72,4 @@ public class HomeworkWebController {
     }
 }
 
+// TODO: 25.07.2022 comit :)

@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-  <h1>Create new homework</h1>
+    <h1>Create new homework</h1>
     <form action="/homeworks" th:object="${homeworkModel}" method="post">
         <div>
             <label for="title">title</label>
@@ -27,6 +27,10 @@
             <input type="submit">
         </div>
     </form>
+
+    <div>
+        <a href="#" th:href="@{/homeworks}">homeworks list</a>
+    </div>
 </div>
 </body>
 </html>
