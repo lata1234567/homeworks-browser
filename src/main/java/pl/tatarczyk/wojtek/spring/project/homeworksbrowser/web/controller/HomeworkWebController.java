@@ -48,7 +48,7 @@ public class HomeworkWebController {
 
         homeworkService.create(homeworkModel);
 
-        return "redirect:/homeworks/create";
+        return "redirect:/homeworks";
     }
 
     @GetMapping(value = "/{id}")
