@@ -2,12 +2,11 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
@@ -37,7 +36,9 @@ public class HomeworkWebController {
     }
 
     @GetMapping(value = "/create")
-    public String createView() {
+    public String createView(ModelMap modelMap) {
+        LOGGER.info("createView()");
+        modelMap.addAttribute("homeworkModel", new HomeworkModel());
         return "homeworks/add";
     }
 
@@ -57,11 +58,23 @@ public class HomeworkWebController {
         return homeworkService.read(id);
     }
 
-    @PutMapping
-    public HomeworkModel update(@RequestBody HomeworkModel homeworkModel) {
-        LOGGER.info("update()");
+    @GetMapping(value = "/update/{id}")
+    public String updateView(ModelMap modelMap, @PathVariable("id") Long id) throws HomeworkNotFoundException {
+        LOGGER.info("updateView(" + id + ")");
+//        HomeworkModel homeworkModel = new HomeworkModel();
+//        homeworkModel.setContent("kanapka");
+//        homeworkModel.setTitle("takie cos");
+//        homeworkModel.setId(1L);
+        HomeworkModel homeworkModel = homeworkService.read(id);
+        modelMap.addAttribute("homeworkModel", homeworkModel);
+        return "homeworks/add";
+    }
 
-        return homeworkService.update(homeworkModel);
+    @PostMapping(value = "/update")
+    public String update(@ModelAttribute HomeworkModel homeworkModel) {
+        LOGGER.info("update(" + homeworkModel + ") ");
+//        homeworkService.update()
+        return "redirect:/homeworks";
     }
 
     @GetMapping(value = "/delete/{id}")

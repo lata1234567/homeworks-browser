@@ -21,6 +21,7 @@
                 <th scope="col">Content</th>
                 <th scope="col">Due date</th>
                 <th scope="col">Delete</th>
+                <th scope="col">Update</th>
             </tr>
             </thead>
             <tbody>
@@ -31,6 +32,9 @@
                 <td th:text="${homework.dueDate}"></td>
                 <td>
                     <a href="#" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{homeworks/update/{id}(id = ${homework.id})}">Update</a>
                 </td>
             </tr>
             </tbody>
