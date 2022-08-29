@@ -10,7 +10,6 @@
     <form action="/homeworks" th:object="${homeworkModel}" method="post">
         <div>
             <label for="title">title</label>
-            <!--            <input type="text" id="title" name="title"/>-->
             <input type="text" th:field="*{title}"/>
         </div>
 
@@ -20,12 +19,12 @@
         </div>
 
         <div>
-            <input type="hidden" th:field="*{id}">
+            <label for="dueDate">dueDate</label>
+            <input type="text" th:field="*{dueDate}"/>
         </div>
 
         <div>
-            <label for="dueDate">dueDate</label>
-            <input type="text" th:field="*{dueDate}"/>
+            <input type="hidden" th:field="*{id}">
         </div>
 
         <div>
