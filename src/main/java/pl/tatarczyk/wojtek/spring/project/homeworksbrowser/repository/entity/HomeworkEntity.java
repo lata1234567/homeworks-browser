@@ -1,7 +1,11 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity;
 
-import javax.persistence.*;
-import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class HomeworkEntity {
@@ -20,7 +24,7 @@ public class HomeworkEntity {
 
     private String title;
     private String content;
-    private LocalDate dueDate;
+    private String dueDate;
 
     public HomeworkEntity() {
     }
@@ -73,11 +77,11 @@ public class HomeworkEntity {
         this.content = content;
     }
 
-    public LocalDate getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 
