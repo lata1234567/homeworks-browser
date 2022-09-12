@@ -1,6 +1,7 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper;
 
 import org.junit.jupiter.api.Test;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
@@ -16,6 +17,7 @@ class HomeworkMapperTest {
     public static final long HOMEWORK_ID = 1L;
     public static final String HOMEWORK_TITLE = "Title";
     private static final String HOMEWORK_CONTENT = "Content";
+    private static final HomeworkSubject HOMEWORK_SUBJECT = HomeworkSubject.FIZYKA;
     HomeworkMapper homeworkMapper = new HomeworkMapper();
 
     @Test
@@ -25,6 +27,7 @@ class HomeworkMapperTest {
         homeworkModel.setId(HOMEWORK_ID);
         homeworkModel.setTitle(HOMEWORK_TITLE);
         homeworkModel.setContent(HOMEWORK_CONTENT);
+        homeworkModel.setSubject(HOMEWORK_SUBJECT);
 
         //When
         HomeworkEntity homeworkEntity = homeworkMapper.from(homeworkModel);
@@ -34,7 +37,8 @@ class HomeworkMapperTest {
                 () -> assertNotNull(homeworkEntity, "homeworkEntity is null"),
                 () -> assertEquals(HOMEWORK_ID, homeworkEntity.getId(), "homeworkModel ID is not equals"),
                 () -> assertEquals(HOMEWORK_TITLE, homeworkEntity.getTitle(), "homeworkModel TITLE is not equals"),
-                () -> assertEquals(HOMEWORK_CONTENT, homeworkEntity.getContent(), "homeworkModel CONTENT is not equals")
+                () -> assertEquals(HOMEWORK_CONTENT, homeworkEntity.getContent(), "homeworkModel CONTENT is not equals"),
+                () -> assertEquals(HOMEWORK_SUBJECT, homeworkEntity.getSubject(), "homeworkModel SUBJECT is not equals")
         );
     }
 

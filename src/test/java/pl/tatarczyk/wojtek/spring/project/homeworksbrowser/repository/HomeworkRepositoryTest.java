@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
-import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.SubjectEntity;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
 
 @SpringBootTest
 class HomeworkRepositoryTest {
@@ -31,11 +31,11 @@ class HomeworkRepositoryTest {
     void given_when_then1(){
         //Given
         HomeworkEntity homeworkEntity = new HomeworkEntity();
-        homeworkEntity.setSubject(SubjectEntity.FIZYKA);
+        homeworkEntity.setSubject(HomeworkSubject.FIZYKA);
         //When
         HomeworkEntity savedHomeworkEntity = homeworkRepository.save(homeworkEntity);
         //Then
-        Assertions.assertEquals(SubjectEntity.FIZYKA, savedHomeworkEntity.getSubject(),"subject is not equals");
+        Assertions.assertEquals(HomeworkSubject.FIZYKA, savedHomeworkEntity.getSubject(),"subject is not equals");
 
     }
 }
