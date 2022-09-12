@@ -29,7 +29,7 @@
         <div>
             <select name="subject" id="subject">
                 <option th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
-                        th:value="${subject}" th:text="${subject}"></option>
+                        th:value="${subject}" th:text="${subject.getName()}"></option>
             </select>
         </div>
 

@@ -33,7 +33,7 @@
                 <td th:text="${homework.title}"></td>
                 <td th:text="${homework.content}"></td>
                 <td th:text="${homework.dueDate}"></td>
-                <td th:text="${homework.subject}"></td>
+                <td th:text="${homework.subject.getName()}"></td>
                 <td>
                     <a href="#" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
                 </td>
