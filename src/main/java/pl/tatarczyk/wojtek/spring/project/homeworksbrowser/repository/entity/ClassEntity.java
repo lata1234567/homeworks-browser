@@ -8,9 +8,9 @@ public class ClassEntity {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "name_id")
-private ClassNameEntity className;
+    private ClassNameEntity className;
 
     private Integer year;
 

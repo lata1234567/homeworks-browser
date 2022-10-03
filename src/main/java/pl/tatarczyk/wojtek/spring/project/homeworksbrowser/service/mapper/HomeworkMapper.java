@@ -58,6 +58,3 @@ public class HomeworkMapper {
     }
 
 }
-
-// TODO: 18.07.2022 poprawić homeworkmapper by używał Mdoelmapper,
-// w controlerze HomeworkWebControler dodać obsługę wyświetlania listy prac domowych (odpowiedni end point + nowy html)
