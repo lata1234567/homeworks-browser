@@ -1,5 +1,6 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity;
 
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
 
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class HomeworkEntity {
     private HomeworkSubject subject;
 
     @Enumerated(EnumType.STRING)
-    private HomeworkStatusEntity status;
+    private HomeworkStatus status;
 
     private String title;
     private String content;
@@ -55,11 +56,11 @@ public class HomeworkEntity {
         this.subject = subject;
     }
 
-    public HomeworkStatusEntity getStatus() {
+    public HomeworkStatus getStatus() {
         return status;
     }
 
-    public void setStatus(HomeworkStatusEntity status) {
+    public void setStatus(HomeworkStatus status) {
         this.status = status;
     }
 

@@ -23,6 +23,8 @@
                 <th scope="col">Content</th>
                 <th scope="col">Due date</th>
                 <th scope="col">Subject</th>
+                <th scope="col">Class</th>
+                <th scope="col">Status</th>
                 <th scope="col">Delete</th>
                 <th scope="col">Update</th>
             </tr>
@@ -34,6 +36,8 @@
                 <td th:text="${homework.content}"></td>
                 <td th:text="${homework.dueDate}"></td>
                 <td th:text="${homework.subject.getName()}"></td>
+                <td th:text="${homework.clazz}"></td>
+                <td th:text="${homework.status}"></td>
                 <td>
                     <a href="#" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
                 </td>

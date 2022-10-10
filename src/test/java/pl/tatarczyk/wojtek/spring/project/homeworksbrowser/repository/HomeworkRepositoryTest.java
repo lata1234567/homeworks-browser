@@ -4,9 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 
 @SpringBootTest
 class HomeworkRepositoryTest {
@@ -15,7 +14,6 @@ class HomeworkRepositoryTest {
     private HomeworkRepository homeworkRepository;
 
     @Test
-    @Rollback(false)
     void given_when_then(){
         //Given
         HomeworkEntity homeworkEntity = new HomeworkEntity();
@@ -27,7 +25,6 @@ class HomeworkRepositoryTest {
     }
 
     @Test
-//    @Rollback(false)
     void given_when_then1(){
         //Given
         HomeworkEntity homeworkEntity = new HomeworkEntity();

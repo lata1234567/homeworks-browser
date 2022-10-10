@@ -43,7 +43,7 @@ class HomeworkServiceTest {
         //When
         HomeworkModel updatedHomeworkModel = homeworkService.update(homeworkModel);
         //Then
-        Assertions.assertNotNull(updatedHomeworkModel, "updateHomeworkEntity is null");
+        Assertions.assertNotNull(updatedHomeworkModel, "updateHomeworkModel is null");
 
     }
 }
