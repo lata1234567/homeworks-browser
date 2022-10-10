@@ -34,6 +34,13 @@
         </div>
 
         <div>
+            <select name="clazz.id" id="clazz">
+                <option th:each="clazz : ${classes}"
+                th:value="${clazz.id}" th:text="${clazz.className}"></option>
+            </select>
+        </div>
+
+        <div>
             <input type="hidden" th:field="*{id}">
         </div>
 

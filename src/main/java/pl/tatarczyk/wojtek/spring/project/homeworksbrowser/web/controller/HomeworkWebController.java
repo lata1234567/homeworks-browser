@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
@@ -22,9 +23,11 @@ public class HomeworkWebController {
     private static final Logger LOGGER = Logger.getLogger(HomeworkWebController.class.getName());
 
     private HomeworkService homeworkService;
+    private ClassService classService;
 
-    public HomeworkWebController(HomeworkService homeworkService) {
+    public HomeworkWebController(HomeworkService homeworkService, ClassService classService) {
         this.homeworkService = homeworkService;
+        this.classService = classService;
     }
 
     @GetMapping
@@ -39,6 +42,7 @@ public class HomeworkWebController {
     public String createView(ModelMap modelMap) {
         LOGGER.info("createView()");
         modelMap.addAttribute("homeworkModel", new HomeworkModel());
+        modelMap.addAttribute("classes", classService.list());
         return "homeworks/add";
     }
 
@@ -85,4 +89,4 @@ public class HomeworkWebController {
     }
 }
 
-// TODO: 08.08.2022 zaimplementować metode update zanalogicznie do metody delete
+// TODO: 03.10.2022 na widoku umożliwiającym dodanie nowej pracy domowej dodać możliwość wyboru klasy, która została wcześniej dodana

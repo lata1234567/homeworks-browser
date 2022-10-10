@@ -2,6 +2,7 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service;
 
 import org.springframework.stereotype.Service;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.HomeworkRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.HomeworkMapper;
@@ -34,6 +35,7 @@ public class HomeworkService {
     public HomeworkModel create(HomeworkModel homeworkModel) {
         LOGGER.info("create(" + homeworkModel + ")");
 
+        homeworkModel.setStatus(HomeworkStatus.NEW);
         HomeworkEntity mappedEntity = homeworkMapper.from(homeworkModel);
         HomeworkEntity savedHomeworkEntity = homeworkRepository.save(mappedEntity);
 
