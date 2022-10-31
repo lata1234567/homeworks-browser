@@ -43,7 +43,8 @@ public class HomeworkWebController {
         LOGGER.info("createView()");
         modelMap.addAttribute("homeworkModel", new HomeworkModel());
         modelMap.addAttribute("classes", classService.list());
-        return "homeworks/add";
+        modelMap.addAttribute("operation","create");
+        return "homeworks/manage";
     }
 
     @PostMapping
@@ -65,13 +66,12 @@ public class HomeworkWebController {
     @GetMapping(value = "/update/{id}")
     public String updateView(ModelMap modelMap, @PathVariable("id") Long id) throws HomeworkNotFoundException {
         LOGGER.info("updateView(" + id + ")");
-//        HomeworkModel homeworkModel = new HomeworkModel();
-//        homeworkModel.setContent("kanapka");
-//        homeworkModel.setTitle("takie cos");
-//        homeworkModel.setId(1L);
         HomeworkModel homeworkModel = homeworkService.read(id);
+        modelMap.addAttribute("classes", classService.list());
+//        modelMap.addAttribute("subjects", homeworkModel.getSubject());
         modelMap.addAttribute("homeworkModel", homeworkModel);
-        return "homeworks/add";
+        modelMap.addAttribute("operation","update");
+        return "homeworks/manage";
     }
 
     @PostMapping(value = "/update")
@@ -89,4 +89,3 @@ public class HomeworkWebController {
     }
 }
 
-// TODO: 03.10.2022 na widoku umożliwiającym dodanie nowej pracy domowej dodać możliwość wyboru klasy, która została wcześniej dodana
