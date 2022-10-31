@@ -68,10 +68,10 @@ public class HomeworkWebController {
         LOGGER.info("updateView(" + id + ")");
         HomeworkModel homeworkModel = homeworkService.read(id);
         modelMap.addAttribute("classes", classService.list());
+//        modelMap.addAttribute("subjects", homeworkModel.getSubject());
         modelMap.addAttribute("homeworkModel", homeworkModel);
         modelMap.addAttribute("operation","update");
         return "homeworks/manage";
-        // TODO: 24.10.2022 nalogicznie do classes dokońćzyć implementacje subjects   
     }
 
     @PostMapping(value = "/update")
