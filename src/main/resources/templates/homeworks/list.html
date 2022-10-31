@@ -36,7 +36,7 @@
                 <td th:text="${homework.content}"></td>
                 <td th:text="${homework.dueDate}"></td>
                 <td th:text="${homework.subject.getName()}"></td>
-                <td th:text="${homework.clazz}"></td>
+                <td th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(homework.clazz)}">Some text here...</td>
                 <td th:text="${homework.status}"></td>
                 <td>
                     <a href="#" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
