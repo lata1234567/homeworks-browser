@@ -47,10 +47,12 @@
         <div>
             <select name="clazz.id" id="clazz">
                 <option th:if="${operation == 'create'}" th:each="clazz : ${classes}"
-                        th:value="${clazz.id}" th:text="${clazz.className}"></option>
+                        th:value="${clazz.id}"
+                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>
 
                 <option th:if="${operation == 'update'}" th:each="clazz : ${classes}"
-                        th:value="${clazz.id}" th:text="${clazz.className}"
+                        th:value="${clazz.id}"
+                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"
                         th:selected="${clazz.id == homeworkModel.clazz.id}"></option>
             </select>
         </div>
