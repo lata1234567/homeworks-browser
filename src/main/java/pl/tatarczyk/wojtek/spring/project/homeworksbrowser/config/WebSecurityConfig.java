@@ -17,8 +17,10 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/home").permitAll()
-                        .anyRequest().authenticated()
+//                        .antMatchers("/", "/home").permitAll()
+                                .antMatchers("/homeworks/create").hasRole("ADMIN")
+//                                .antMatchers("/homeworks/create").denyAll()
+                                .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form.permitAll())
                 .logout((logout) -> logout.permitAll());
@@ -33,6 +35,7 @@ public class WebSecurityConfig {
                         .username("user")
                         .password("password")
                         .roles("USER")
+//                        .roles("USER","ADMIN")
                         .build();
 
         return new InMemoryUserDetailsManager(user);

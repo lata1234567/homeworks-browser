@@ -13,4 +13,7 @@ public class StudentEntity {
 
     private String name;
     private String surname;
+
+    private String password;
+    private String login;
 }
