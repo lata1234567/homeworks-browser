@@ -29,7 +29,13 @@ public class ClassService {
         LOGGER.info("list()");
         List<ClassEntity> entities = classRepository.findAll();
 
-        return classMapper.formEntities(entities);
+        LOGGER.info("entities = " + entities);
+
+        List<ClassModel> classModels = classMapper.formEntities(entities);
+
+        LOGGER.info("list() = " + classModels);
+
+        return classModels;
     }
 
 
@@ -40,7 +46,9 @@ public class ClassService {
         ClassEntity mappedEntity = classMapper.from(classModel);
         ClassEntity savedClassEntity = classRepository.save(mappedEntity);
 
-        return classMapper.from(savedClassEntity);
+        ClassModel createdClassModel = classMapper.from(savedClassEntity);
+        LOGGER.info("create(...) = " + createdClassModel);
+        return createdClassModel;
     }
 
     public ClassModel read(Long id) throws ClassNotFoundException {

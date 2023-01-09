@@ -14,7 +14,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(value = "/api/class")
+@RequestMapping(value = "/api/classes")
 public class ClassController {
 
     private static final Logger LOGGER = Logger.getLogger(ClassController.class.getName());

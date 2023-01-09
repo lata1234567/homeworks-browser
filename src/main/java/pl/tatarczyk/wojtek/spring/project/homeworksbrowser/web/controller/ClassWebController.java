@@ -14,7 +14,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 import java.util.logging.Logger;
 
 @Controller
-@RequestMapping(value="/class")
+@RequestMapping(value="/classes")
 public class ClassWebController {
     private static final Logger LOGGER = Logger.getLogger(ClassWebController.class.getName());
 
@@ -29,7 +29,7 @@ public class ClassWebController {
 //        LOGGER.info("list()");
 //        List<ClassModel> classes = classService.list();
 //        model.addAttribute("classes",classes);
-//        return "class/";
+//        return "classes/";
 //    }
 
     @PostMapping
@@ -38,7 +38,7 @@ public class ClassWebController {
 
           classService.create(classModel);
 
-          return "class/add";
+          return "classes/add";
     }
 
     @GetMapping(value="/create")
@@ -46,7 +46,7 @@ public class ClassWebController {
         LOGGER.info("createView()");
         modelMap.addAttribute("classModel",new ClassModel());
 
-        return "class/add";
+        return "classes/add";
     }
 
     @GetMapping(value="/{id}")

@@ -13,7 +13,7 @@
         <div>
             <label for="login" class="form-label">Login</label>
             <input type="text" class="form-control" id="login" th:field="*{login}" placeholder="enter login">
-<!--            <input type="text" class="form-control" id="login" name="login" placeholder="enter login">-->
+<!--            <input type="text" classes="form-control" id="login" name="login" placeholder="enter login">-->
         </div>
 
         <div>
@@ -31,13 +31,13 @@
             <input type="text" class="form-control" id="surname" th:field="*{surname}" placeholder="enter surname">
         </div>
 
-<!--        <div>-->
-<!--            <select name="clazz.id" id="clazz">-->
-<!--                <option th:each="clazz : ${classes}"-->
-<!--                        th:value="${clazz.id}"-->
-<!--                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>-->
-<!--            </select>-->
-<!--        </div>-->
+        <div>
+            <select name="clazz.id" id="clazz">
+                <option th:each="clazz : ${classes}"
+                        th:value="${clazz.id}"
+                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>
+            </select>
+        </div>
 
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Save</button>

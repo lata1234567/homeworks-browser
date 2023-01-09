@@ -42,7 +42,7 @@ public class StudentWebController {
     public String createView(ModelMap modelMap) {
         LOGGER.info("createView()");
         modelMap.addAttribute("studentModel", new StudentModel());
-//        modelMap.addAttribute("classes", classService.list());
+        modelMap.addAttribute("classes", classService.list());
         return "students/add";
     }
 
@@ -91,5 +91,5 @@ public class StudentWebController {
         return "redirect:/students";
     }
 
-    // TODO: 28.11.2022 dorobić testy do studenta
+    // TODO: 02.01.2023 Podczas tworzenia nowego studenta dodać możliwośćwyboru klasy za pomocą listy rozwijanej
 }

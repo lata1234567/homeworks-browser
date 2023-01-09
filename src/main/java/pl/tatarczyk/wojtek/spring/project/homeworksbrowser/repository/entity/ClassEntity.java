@@ -17,11 +17,7 @@ public class ClassEntity {
     public ClassEntity() {
     }
 
-    public ClassEntity(Long id, ClassNameEntity className, Integer year) {
-        this.id = id;
-        this.className = className;
-        this.year = year;
-    }
+
 
     public Long getId() {
         return id;
