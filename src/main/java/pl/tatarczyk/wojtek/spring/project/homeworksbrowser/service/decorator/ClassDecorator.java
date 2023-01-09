@@ -13,7 +13,7 @@ public class ClassDecorator {
         String decoratedClass = "";
         if (classModel != null) {
             if (classModel.getClassName() != null) {
-                decoratedClass = "class : " + classModel.getClassName().getName() + ", year : " + classModel.getYear();
+                decoratedClass = "classes : " + classModel.getClassName().getName() + ", year : " + classModel.getYear();
             }
         }
         LOGGER.info("decorate(...)= " + decoratedClass);

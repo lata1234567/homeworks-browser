@@ -46,7 +46,8 @@
 
         <div>
             <select name="clazz.id" id="clazz">
-                <option th:if="${operation == 'create'}" th:each="clazz : ${classes}"
+                <option th:if="${operation == 'create'}"
+                        th:each="clazz : ${classes}"
                         th:value="${clazz.id}"
                         th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>
 
