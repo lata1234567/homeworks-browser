@@ -9,6 +9,11 @@
 <body>
 <div class="container-fluid">
     <h1>Create new class</h1>
+
+    <div>
+        <a href="#" th:href="@{/classes}">list of classes</a>
+    </div>
+
     <form action="/classes" th:object="${classModel}" method="post">
 
         <div class="mb-3">

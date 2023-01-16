@@ -9,6 +9,10 @@
 <body>
 <div class="container-fluid">
     <h1>Create new student</h1>
+    <div>
+        <a href="#" th:href="@{/students}">list of student</a>
+    </div>
+
     <form action="#" th:action="@{/students}" th:object="${studentModel}" method="post">
         <div>
             <label for="login" class="form-label">Login</label>

@@ -11,6 +11,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNo
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -25,8 +26,9 @@ public class ClassController {
         this.classService = classService;
     }
 
-    void list() {
-        // TODO: 03.10.2022 jak maper naprawiony to to zrobić :)
+    public List<ClassModel> list() {
+        LOGGER.info("list()");
+        return classService.list();
     }
 
     public ClassModel create(@RequestBody ClassModel classModel) {

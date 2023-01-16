@@ -1,6 +1,7 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +12,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNo
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -24,13 +26,13 @@ public class ClassWebController {
         this.classService = classService;
     }
 
-//    @GetMapping
-//    public String list(Model model){
-//        LOGGER.info("list()");
-//        List<ClassModel> classes = classService.list();
-//        model.addAttribute("classes",classes);
-//        return "classes/";
-//    }
+    @GetMapping
+    public String list(Model model){
+        LOGGER.info("list()");
+        List<ClassModel> classes = classService.list();
+        model.addAttribute("classes",classes);
+        return "classes/list";
+    }
 
     @PostMapping
     public String create(@ModelAttribute ClassModel classModel){
@@ -74,6 +76,6 @@ public class ClassWebController {
     public String delete(@PathVariable("id") Long id) {
         LOGGER.info("delete()");
         classService.delete(id);
-        return null;
+        return "redirect:/classes";
     }
 }

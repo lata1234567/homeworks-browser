@@ -91,5 +91,4 @@ public class StudentWebController {
         return "redirect:/students";
     }
 
-    // TODO: 02.01.2023 Podczas tworzenia nowego studenta dodać możliwośćwyboru klasy za pomocą listy rozwijanej
 }
