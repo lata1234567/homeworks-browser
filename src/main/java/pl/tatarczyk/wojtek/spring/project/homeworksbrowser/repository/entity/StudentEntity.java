@@ -1,8 +1,11 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "STUDENTS")
 public class StudentEntity {
     @Id
     @GeneratedValue
@@ -16,6 +19,9 @@ public class StudentEntity {
 
     private String password;
     private String login;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<RoleEntity> roles = new HashSet<>();
 
     public StudentEntity() {
     }
@@ -68,6 +74,14 @@ public class StudentEntity {
         this.login = login;
     }
 
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "StudentEntity{" +
@@ -77,6 +91,7 @@ public class StudentEntity {
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
                 ", login='" + login + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }
