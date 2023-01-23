@@ -20,7 +20,7 @@ public class StudentEntity {
     private String password;
     private String login;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
     public StudentEntity() {
@@ -91,6 +91,7 @@ public class StudentEntity {
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
                 ", login='" + login + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

@@ -7,8 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.StudentRepository;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.RoleEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.StudentEntity;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 @Service
@@ -33,9 +35,19 @@ public class HomeworksUserDetailsService implements UserDetailsService {
         }
 
         StudentEntity studentEntity = studentRepository.findByLogin(username);
+
+        Set<RoleEntity> roles = studentEntity.getRoles();
+        String[] roleNames = new String[roles.size()];
+        int index = 0;
+        for (RoleEntity roleEntity : roles) {
+            roleNames[index] = roleEntity.getName();
+            index++;
+        }
+
         UserDetails userDetails = User.withUsername(studentEntity.getLogin())
                 .password(studentEntity.getPassword())
-                .roles("USER")
+//                .roles(roles.toArray(new String[0]))
+                .roles(roleNames)
                 .build();
 
         LOGGER.info("loadUserByUsername(...) = " + userDetails);

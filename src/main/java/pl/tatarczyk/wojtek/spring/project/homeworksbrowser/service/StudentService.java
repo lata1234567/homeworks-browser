@@ -3,7 +3,10 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.StudentNotFoundException;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.StudentRole;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.RoleRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.StudentRepository;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.RoleEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.StudentEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.StudentMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.StudentModel;
@@ -18,11 +21,14 @@ public class StudentService {
     private static final Logger LOGGER = Logger.getLogger(StudentService.class.getName());
 
     private final StudentRepository studentRepository;
+    private final RoleRepository roleRepository;
     private final StudentMapper studentMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper, PasswordEncoder passwordEncoder) {
+    public StudentService(StudentRepository studentRepository, RoleRepository roleRepository,
+                          StudentMapper studentMapper, PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
+        this.roleRepository = roleRepository;
         this.studentMapper = studentMapper;
         this.passwordEncoder = passwordEncoder;
     }
@@ -39,10 +45,16 @@ public class StudentService {
 
         studentModel.setPassword(passwordEncoder.encode(studentModel.getPassword()));
         StudentEntity mappedEntity = studentMapper.from(studentModel);
-//        mappedEntity.getRoles().add();
+
+        RoleEntity studentRoleEntity = roleRepository.findByName(StudentRole.USER.getName());
+        mappedEntity.getRoles().add(studentRoleEntity);
+
         StudentEntity savedStudentEntity = studentRepository.save(mappedEntity);
 
-        return studentMapper.from(savedStudentEntity);
+        StudentModel mappedStudentModel = studentMapper.from(savedStudentEntity);
+        
+        LOGGER.info("create(...) = " + mappedStudentModel);
+        return mappedStudentModel;
     }
 
     public StudentModel read(Long id) throws StudentNotFoundException {
