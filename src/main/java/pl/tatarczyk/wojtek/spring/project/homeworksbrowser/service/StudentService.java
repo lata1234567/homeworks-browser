@@ -39,6 +39,7 @@ public class StudentService {
 
         studentModel.setPassword(passwordEncoder.encode(studentModel.getPassword()));
         StudentEntity mappedEntity = studentMapper.from(studentModel);
+//        mappedEntity.getRoles().add();
         StudentEntity savedStudentEntity = studentRepository.save(mappedEntity);
 
         return studentMapper.from(savedStudentEntity);
