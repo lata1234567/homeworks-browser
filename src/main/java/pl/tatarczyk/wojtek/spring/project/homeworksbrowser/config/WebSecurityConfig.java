@@ -22,7 +22,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
 //                        .antMatchers("/", "/home").permitAll()
 //                        .antMatchers("/**").permitAll()
-                                .antMatchers("/homeworks/create").hasRole("USER")
+                                .antMatchers("/homeworks/create").hasAnyRole("USER","ADMIN")
                                 .antMatchers(HttpMethod.POST, "/students").permitAll()
                                 .antMatchers(HttpMethod.GET, "/students/create").permitAll()
                                 .antMatchers("/students/create/success").permitAll()

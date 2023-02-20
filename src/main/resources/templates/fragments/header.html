@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="header">
+    <span>Welcome, </span>
+    <span th:text="${#authentication.name}"></span>.
+    <span>
+        <a href="#" th:href="@{/logout}">Logout</a>
+    </span>
+</div>
+</body>
+</html>
