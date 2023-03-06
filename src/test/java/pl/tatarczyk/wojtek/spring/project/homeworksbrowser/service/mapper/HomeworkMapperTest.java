@@ -7,6 +7,8 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.Hom
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ class HomeworkMapperTest {
     private static final String HOMEWORK_CONTENT = "Content";
     private static final HomeworkSubject HOMEWORK_SUBJECT = HomeworkSubject.FIZYKA;
     private static final HomeworkStatus HOMEWORK_STATUS = HomeworkStatus.NEW;
+    public static final LocalDate HOMEWORK_DUE_DATE = LocalDate.of(2023, Month.FEBRUARY, 5);
 
     private HomeworkMapper homeworkMapper = new HomeworkMapper();
 
@@ -36,6 +39,7 @@ class HomeworkMapperTest {
         homeworkModel.setSubject(HOMEWORK_SUBJECT);
         homeworkModel.setClazz(classModel);
         homeworkModel.setStatus(HOMEWORK_STATUS);
+        homeworkModel.setDueDate(HOMEWORK_DUE_DATE);
 
         //When
         HomeworkEntity homeworkEntity = homeworkMapper.from(homeworkModel);
@@ -48,7 +52,9 @@ class HomeworkMapperTest {
                 () -> assertEquals(HOMEWORK_CONTENT, homeworkEntity.getContent(), "homeworkModel CONTENT is not equals"),
                 () -> assertEquals(HOMEWORK_SUBJECT, homeworkEntity.getSubject(), "homeworkModel SUBJECT is not equals"),
                 () -> assertNotNull(homeworkEntity.getClazz(), "homeworkModel CLASS is null"),
-                () -> assertEquals(HOMEWORK_STATUS, homeworkEntity.getStatus(), "homeworkModel STATUS is not equals")
+                () -> assertEquals(HOMEWORK_STATUS, homeworkEntity.getStatus(), "homeworkModel STATUS is not equals"),
+                () -> assertEquals(HOMEWORK_DUE_DATE,homeworkEntity.getDueDate(),"homeworkModel DUE DATE is not equals")
+
         );
     }
 

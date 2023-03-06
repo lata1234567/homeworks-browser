@@ -11,7 +11,8 @@
 <div class="container-fluid">
     <h1 th:if="${operation == 'create'}">Create new homework</h1>
     <h1 th:if="${operation == 'update'}">Update homework</h1>
-    <form action="/homeworks" th:object="${homeworkModel}" method="post">
+
+    <form action="#" th:action="@{operation} == 'create' ? @{/homeworks} : @{/homeworks/update}" th:object="${homeworkModel}" method="post">
 
         <div class="mb-3">
             <label for="title" class="form-label">title</label>
@@ -25,7 +26,7 @@
 
         <div class="mb-3">
             <label for="dueDate" class="form-label">dueDate</label>
-            <input type="text" class="form-control" id="dueDate" th:field="*{dueDate}" placeholder="enter due date"/>
+            <input type="date" dataformatas="yyyy-MM-dd" class="form-control" id="dueDate" th:field="*{dueDate}" placeholder="enter due date"/>
         </div>
 
         <div>
@@ -56,6 +57,17 @@
                         th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"
                         th:selected="${clazz.id == homeworkModel.clazz.id}"></option>
             </select>
+        </div>
+
+        <div>
+            <select name="status" id="status">
+                <option th:if="${operation == 'update'}"
+                        th:each="status : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus).values()}"
+                        th:value="${status}"
+                        th:text="${status.getName()}"
+                        th:selected="${status == homeworkModel.status}"></option>
+            </select>
+
         </div>
 
         <div>

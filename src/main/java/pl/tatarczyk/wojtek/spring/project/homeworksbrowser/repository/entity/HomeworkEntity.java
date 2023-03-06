@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.time.LocalDate;
 
 @Entity
 public class HomeworkEntity {
@@ -27,7 +28,7 @@ public class HomeworkEntity {
 
     private String title;
     private String content;
-    private String dueDate;
+    private LocalDate dueDate;
 
     public HomeworkEntity() {
     }
@@ -80,11 +81,11 @@ public class HomeworkEntity {
         this.content = content;
     }
 
-    public String getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 

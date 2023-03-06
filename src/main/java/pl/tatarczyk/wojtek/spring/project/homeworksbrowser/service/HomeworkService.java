@@ -59,8 +59,10 @@ public class HomeworkService {
 
         HomeworkEntity mappedHomeworkEntity = homeworkMapper.from(homeworkModel);
         HomeworkEntity updateHomeworkEntity = homeworkRepository.save(mappedHomeworkEntity);
+        HomeworkModel mappedHomeworkModel = homeworkMapper.from(updateHomeworkEntity);
 
-        return homeworkMapper.from(updateHomeworkEntity);
+        LOGGER.info("update(...) = " + mappedHomeworkModel);
+        return mappedHomeworkModel;
     }
 
     public void delete(Long id) {

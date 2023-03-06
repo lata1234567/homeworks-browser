@@ -77,7 +77,9 @@ public class HomeworkWebController {
     @PostMapping(value = "/update")
     public String update(@ModelAttribute HomeworkModel homeworkModel) {
         LOGGER.info("update(" + homeworkModel + ") ");
-//        homeworkService.update()
+        homeworkService.update(homeworkModel);
+
+        LOGGER.info("update(...) = ");
         return "redirect:/homeworks";
     }
 
