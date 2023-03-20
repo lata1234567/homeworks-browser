@@ -8,6 +8,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.Hom
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.HomeworkMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -36,6 +37,8 @@ public class HomeworkService {
         LOGGER.info("create(" + homeworkModel + ")");
 
         homeworkModel.setStatus(HomeworkStatus.NEW);
+        homeworkModel.setCreated(LocalDate.now());
+
         HomeworkEntity mappedEntity = homeworkMapper.from(homeworkModel);
         HomeworkEntity savedHomeworkEntity = homeworkRepository.save(mappedEntity);
 

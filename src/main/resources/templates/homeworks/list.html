@@ -42,11 +42,11 @@
                 <td th:text="${homework.title}"></td>
                 <td th:text="${homework.content}"></td>
                 <td th:text="${homework.dueDate}"></td>
-                <td th:text="${homework.subject.getName()}"></td>
+                <td th:text="${homework?.subject?.name}"></td>
                 <td th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(homework.clazz)}">
                     Some text here...
                 </td>
-                <td th:text="${homework.status.getName()}"></td>
+                <td th:text="${homework?.status?.name}"></td>
                 <td>
                     <a href="#" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
                 </td>
