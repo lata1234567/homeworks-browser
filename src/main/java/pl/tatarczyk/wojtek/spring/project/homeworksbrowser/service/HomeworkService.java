@@ -4,8 +4,12 @@ import org.springframework.stereotype.Service;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.HomeworkRepository;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.StudentRepository;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.ClassEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.StudentEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.HomeworkMapper;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.StudentMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
 import java.util.List;
@@ -18,17 +22,28 @@ public class HomeworkService {
     private static final Logger LOGGER = Logger.getLogger(HomeworkService.class.getName());
 
     private final HomeworkRepository homeworkRepository;
+    private final StudentRepository studentRepository;
     private final HomeworkMapper homeworkMapper;
+    private final StudentMapper studentMapper;
 
-    public HomeworkService(HomeworkRepository homeworkRepository, HomeworkMapper homeworkMapper) {
+    public HomeworkService(HomeworkRepository homeworkRepository, StudentRepository studentRepository, HomeworkMapper homeworkMapper, StudentMapper studentMapper) {
         this.homeworkRepository = homeworkRepository;
+        this.studentRepository = studentRepository;
         this.homeworkMapper = homeworkMapper;
+        this.studentMapper = studentMapper;
     }
 
-    public List<HomeworkModel> list() {
-        LOGGER.info("list()");
-        List<HomeworkEntity> entities = homeworkRepository.findAll();
+    public List<HomeworkModel> list(String principalName) {
+        LOGGER.info("list(" + principalName + ")");
 
+        StudentEntity studentEntity = studentRepository.findByLogin(principalName);
+        ClassEntity classEntity = studentEntity.getClazz();
+//        List<HomeworkEntity> entities = homeworkRepository.findAll();
+
+        List<HomeworkEntity> entities = homeworkRepository.findByClazz_ClassName_Name(
+                classEntity.getClassName().getName());
+
+        LOGGER.info("list(...) = " + entities);
         return homeworkMapper.fromEntities(entities);
     }
 

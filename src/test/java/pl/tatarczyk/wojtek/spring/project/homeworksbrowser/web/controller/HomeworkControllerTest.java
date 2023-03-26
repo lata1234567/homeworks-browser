@@ -25,7 +25,7 @@ class HomeworkControllerTest {
         //Given
 
         //When
-        List<HomeworkModel> models = homeworkController.list();
+        List<HomeworkModel> models = homeworkController.list(null);
         //Then
         Assertions.assertEquals(0, models.size(),"models size not zero");
 
@@ -37,7 +37,7 @@ class HomeworkControllerTest {
 
         //When
         homeworkRepository.save(new HomeworkEntity());
-        List<HomeworkModel> models = homeworkController.list();
+        List<HomeworkModel> models = homeworkController.list(null);
         //Then
         Assertions.assertEquals(1, models.size(),"models size not zero");
 
