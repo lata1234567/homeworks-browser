@@ -28,9 +28,19 @@ public class HomeworkStatusChanger {
         for (HomeworkEntity entity : entities) {
             LocalDate addDate = entity.getCreated();
             if (addDate != null) {
-                if (addDate.getDayOfMonth() + 1 <= LocalDate.now().getDayOfMonth()) {
+                if(addDate.getYear()<LocalDate.now().getYear()){
                     entity.setStatus(HomeworkStatus.IN_PROGRESS);
                     homeworkRepository.save(entity);
+                }else{
+                    if(addDate.getMonthValue()<LocalDate.now().getMonthValue()) {
+                        entity.setStatus(HomeworkStatus.IN_PROGRESS);
+                        homeworkRepository.save(entity);
+                    } else{
+                        if (addDate.getDayOfMonth() + 1 <= LocalDate.now().getDayOfMonth()) {
+                            entity.setStatus(HomeworkStatus.IN_PROGRESS);
+                            homeworkRepository.save(entity);
+                        }
+                    }
                 }
             }
         }
