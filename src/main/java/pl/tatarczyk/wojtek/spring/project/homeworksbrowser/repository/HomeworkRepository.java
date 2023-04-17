@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface HomeworkRepository extends JpaRepository<HomeworkEntity, Long> {
     List<HomeworkEntity> findByClazz_ClassName_Name(String name);
-    List<HomeworkEntity> findByYearAndClazz_ClassName_Name(Integer year, String name);
+    List<HomeworkEntity> findByClazz_ClassName_NameAndClazzYear(String name, Integer year);
 }
