@@ -22,6 +22,7 @@ public class HomeworkModel {
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
-//    private String dueDate; //chwilowe
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate created;
 }
 

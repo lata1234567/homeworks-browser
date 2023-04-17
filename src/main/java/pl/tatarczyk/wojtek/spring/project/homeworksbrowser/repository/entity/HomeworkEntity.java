@@ -30,6 +30,7 @@ public class HomeworkEntity {
     private String title;
     private String content;
     private LocalDate dueDate;
+    private LocalDate created;
 
     public HomeworkEntity() {
     }
@@ -90,6 +91,14 @@ public class HomeworkEntity {
         this.dueDate = dueDate;
     }
 
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
+    }
+
     @Override
     public String toString() {
         return "HomeworkEntity{" +
@@ -100,6 +109,7 @@ public class HomeworkEntity {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", dueDate=" + dueDate +
+                ", addDate=" + created +
                 '}';
     }
 }

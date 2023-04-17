@@ -24,12 +24,12 @@ class HomeworkMapperTest {
     private static final HomeworkSubject HOMEWORK_SUBJECT = HomeworkSubject.FIZYKA;
     private static final HomeworkStatus HOMEWORK_STATUS = HomeworkStatus.NEW;
     public static final LocalDate HOMEWORK_DUE_DATE = LocalDate.of(2023, Month.FEBRUARY, 5);
-
-    private HomeworkMapper homeworkMapper = new HomeworkMapper();
+    public static final LocalDate HOMEWORK_ADD_DATE = LocalDate.of(2023, Month.NOVEMBER, 21);
 
     @Test
     void from() {
         //Given
+        HomeworkMapper homeworkMapper = new HomeworkMapper();
         HomeworkModel homeworkModel = new HomeworkModel();
         ClassModel classModel = new ClassModel();
 
@@ -40,6 +40,7 @@ class HomeworkMapperTest {
         homeworkModel.setClazz(classModel);
         homeworkModel.setStatus(HOMEWORK_STATUS);
         homeworkModel.setDueDate(HOMEWORK_DUE_DATE);
+        homeworkModel.setCreated(HOMEWORK_ADD_DATE);
 
         //When
         HomeworkEntity homeworkEntity = homeworkMapper.from(homeworkModel);
@@ -53,14 +54,15 @@ class HomeworkMapperTest {
                 () -> assertEquals(HOMEWORK_SUBJECT, homeworkEntity.getSubject(), "homeworkModel SUBJECT is not equals"),
                 () -> assertNotNull(homeworkEntity.getClazz(), "homeworkModel CLASS is null"),
                 () -> assertEquals(HOMEWORK_STATUS, homeworkEntity.getStatus(), "homeworkModel STATUS is not equals"),
-                () -> assertEquals(HOMEWORK_DUE_DATE,homeworkEntity.getDueDate(),"homeworkModel DUE DATE is not equals")
-
+                () -> assertEquals(HOMEWORK_DUE_DATE, homeworkEntity.getDueDate(), "homeworkModel DUE DATE is not equals"),
+                () -> assertEquals(HOMEWORK_ADD_DATE, homeworkEntity.getCreated(), "homeworkModel ADD DATE is not equals")
         );
     }
 
     @Test
     void testFrom() {
         //Given
+        HomeworkMapper homeworkMapper = new HomeworkMapper();
         List<HomeworkModel> homeworkModels = new ArrayList<>();
         homeworkModels.add(new HomeworkModel());
         homeworkModels.add(new HomeworkModel());
