@@ -38,10 +38,9 @@ public class HomeworkService {
 
         StudentEntity studentEntity = studentRepository.findByLogin(principalName);
         ClassEntity classEntity = studentEntity.getClazz();
-//        List<HomeworkEntity> entities = homeworkRepository.findAll();
 
-        List<HomeworkEntity> entities = homeworkRepository.findByClazz_ClassName_Name(
-                classEntity.getClassName().getName());
+        List<HomeworkEntity> entities = homeworkRepository.findByClazz_ClassName_NameAndClazzYear(
+                classEntity.getClassName().getName(),classEntity.getYear());
 
         LOGGER.info("list(...) = " + entities);
         return homeworkMapper.fromEntities(entities);
