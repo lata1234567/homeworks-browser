@@ -3,6 +3,7 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
@@ -50,9 +52,12 @@ public class HomeworkWebController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute HomeworkModel homeworkModel) {
+    public String create(@Valid @ModelAttribute HomeworkModel homeworkModel, BindingResult bindingResult) {
         LOGGER.info("create(" + homeworkModel + ")");
 
+        if (bindingResult.hasErrors()) {
+            LOGGER.info("Errors: " + bindingResult.getAllErrors());
+        }
         homeworkService.create(homeworkModel);
 
         return "redirect:/homeworks";
