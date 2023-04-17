@@ -52,11 +52,16 @@ public class HomeworkWebController {
     }
 
     @PostMapping
-    public String create(@Valid @ModelAttribute HomeworkModel homeworkModel, BindingResult bindingResult) {
+    public String create(
+            @Valid @ModelAttribute HomeworkModel homeworkModel, BindingResult bindingResult,
+            ModelMap modelMap) {
         LOGGER.info("create(" + homeworkModel + ")");
 
         if (bindingResult.hasErrors()) {
-            LOGGER.info("Errors: " + bindingResult.getAllErrors());
+//            LOGGER.info("Errors: " + bindingResult.getAllErrors());
+            modelMap.addAttribute("classes", classService.list());
+            modelMap.addAttribute("operation","create");
+            return "homeworks/manage";
         }
         homeworkService.create(homeworkModel);
 

@@ -16,9 +16,9 @@ public class HomeworkModel {
     private HomeworkSubject subject;
     private HomeworkStatus status;
 
-    @NotEmpty
+    @NotEmpty(message = "Tytuł pracy domowej nie może być pusty")
     private String title;
-    @NotEmpty
+    @NotEmpty(message = "Treść pracy domowej nie może być pusta")
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;

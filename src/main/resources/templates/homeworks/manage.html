@@ -17,11 +17,13 @@
         <div class="mb-3">
             <label for="title" class="form-label">title</label>
             <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="enter title"/>
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Please enter title</p>
         </div>
 
         <div class="mb-3">
             <label for="content" class="form-label">content</label>
             <input type="text" class="form-control" id="content" th:field="*{content}" placeholder="enter content"/>
+            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Please enter title</p>
         </div>
 
         <div class="mb-3">
@@ -30,7 +32,8 @@
         </div>
 
         <div>
-            <select name="subject" id="subject">
+<!--            <select name="subject" id="subject" th:field="${subject}">-->
+            <select th:field="*{subject}">
                 <option th:if="${operation == 'create'}"
                         th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
                         th:value="${subject}"
