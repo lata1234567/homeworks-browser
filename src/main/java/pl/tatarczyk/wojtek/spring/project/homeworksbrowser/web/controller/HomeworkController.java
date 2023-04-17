@@ -12,6 +12,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.Homewor
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,9 +29,10 @@ public class HomeworkController {
     }
 
     @GetMapping
-    public List<HomeworkModel> list() {
+    public List<HomeworkModel> list(Principal principal) {
         LOGGER.info("list()");
-        return homeworkService.list();
+        String principalName = principal.getName();
+        return homeworkService.list(principalName);
     }
 
     @PostMapping

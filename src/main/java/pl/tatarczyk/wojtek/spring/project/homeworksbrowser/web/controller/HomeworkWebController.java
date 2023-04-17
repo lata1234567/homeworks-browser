@@ -13,6 +13,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -31,9 +32,10 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public String list(Model model) {
-        LOGGER.info("list()");
-        List<HomeworkModel> homeworks = homeworkService.list();
+    public String list(Model model, Principal principal) {
+        LOGGER.info("list("+principal+")");
+        String principalName = principal.getName();
+        List<HomeworkModel> homeworks = homeworkService.list(principalName);
         model.addAttribute("homeworks", homeworks);
         return "homeworks/list";
     }

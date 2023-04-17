@@ -3,6 +3,7 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,7 +18,7 @@ public class HomeworkEntity {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private ClassEntity clazz;
 
     @Enumerated(EnumType.STRING)
