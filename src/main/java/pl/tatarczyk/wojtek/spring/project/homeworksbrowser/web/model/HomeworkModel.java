@@ -20,6 +20,7 @@ public class HomeworkModel {
     private String title;
     @NotEmpty(message = "Treść pracy domowej nie może być pusta")
     private String content;
+//    @NotNull(message = "Data wykonania nie może być pusta")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

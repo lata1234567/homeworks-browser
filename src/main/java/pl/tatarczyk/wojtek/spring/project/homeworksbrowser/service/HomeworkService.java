@@ -1,13 +1,16 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service;
 
 import org.springframework.stereotype.Service;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.ClassRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.HomeworkRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.StudentRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.ClassEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.StudentEntity;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.ClassMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.HomeworkMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.StudentMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
@@ -24,36 +27,51 @@ public class HomeworkService {
 
     private final HomeworkRepository homeworkRepository;
     private final StudentRepository studentRepository;
+    private final ClassRepository classRepository;
     private final HomeworkMapper homeworkMapper;
     private final StudentMapper studentMapper;
+    private final ClassMapper classMapper;
 
-    public HomeworkService(HomeworkRepository homeworkRepository, StudentRepository studentRepository, HomeworkMapper homeworkMapper, StudentMapper studentMapper) {
+    public HomeworkService(HomeworkRepository homeworkRepository, StudentRepository studentRepository, ClassRepository classRepository, HomeworkMapper homeworkMapper, StudentMapper studentMapper, ClassMapper classMapper) {
         this.homeworkRepository = homeworkRepository;
         this.studentRepository = studentRepository;
+        this.classRepository = classRepository;
         this.homeworkMapper = homeworkMapper;
         this.studentMapper = studentMapper;
+        this.classMapper = classMapper;
     }
 
     public List<HomeworkModel> list(String principalName) {
         LOGGER.info("list(" + principalName + ")");
 
         StudentEntity studentEntity = studentRepository.findByLogin(principalName);
+        LOGGER.info("studentEntity: " + studentEntity);
         ClassEntity classEntity = studentEntity.getClazz();
 
         List<HomeworkEntity> entities = homeworkRepository.findByClazz_ClassName_NameAndClazzYear(
                 classEntity.getClassName().getName(),classEntity.getYear());
 
+        // TODO: 18.05.2023 zaimplementować pobieranie class entity analogicznie jak w poniższej metodzie create
+
         LOGGER.info("list(...) = " + entities);
         return homeworkMapper.fromEntities(entities);
     }
 
-    public HomeworkModel create(HomeworkModel homeworkModel) {
+//    @Transactional
+    public HomeworkModel create(HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("create(" + homeworkModel + ")");
 
         homeworkModel.setStatus(HomeworkStatus.NEW);
         homeworkModel.setCreated(LocalDate.now());
 
         HomeworkEntity mappedEntity = homeworkMapper.from(homeworkModel);
+
+        Long clazzId = homeworkModel.getClazz().getId();
+        Optional<ClassEntity> optionalClassEntity = classRepository.findById(clazzId);
+        ClassEntity classEntity = optionalClassEntity.orElseThrow(
+                () -> new ClassNotFoundException("Not found class with id " + clazzId));
+        mappedEntity.setClazz(classEntity);
+
         HomeworkEntity savedHomeworkEntity = homeworkRepository.save(mappedEntity);
 
         return homeworkMapper.from(savedHomeworkEntity);

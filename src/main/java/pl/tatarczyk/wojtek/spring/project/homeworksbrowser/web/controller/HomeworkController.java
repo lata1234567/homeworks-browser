@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
@@ -36,7 +37,7 @@ public class HomeworkController {
     }
 
     @PostMapping
-    public HomeworkModel create(@RequestBody HomeworkModel homeworkModel) {
+    public HomeworkModel create(@RequestBody HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("create(" + homeworkModel + ")");
 
         return homeworkService.create(homeworkModel);

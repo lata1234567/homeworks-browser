@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
@@ -54,7 +55,7 @@ public class HomeworkWebController {
     @PostMapping
     public String create(
             @Valid @ModelAttribute HomeworkModel homeworkModel, BindingResult bindingResult,
-            ModelMap modelMap) {
+            ModelMap modelMap) throws ClassNotFoundException {
         LOGGER.info("create(" + homeworkModel + ")");
 
         if (bindingResult.hasErrors()) {
