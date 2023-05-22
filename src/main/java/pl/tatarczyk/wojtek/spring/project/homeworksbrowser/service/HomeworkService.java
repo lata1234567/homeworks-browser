@@ -13,6 +13,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.Stu
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.ClassMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.HomeworkMapper;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.mapper.StudentMapper;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
 import java.time.LocalDate;
@@ -31,14 +32,16 @@ public class HomeworkService {
     private final HomeworkMapper homeworkMapper;
     private final StudentMapper studentMapper;
     private final ClassMapper classMapper;
+    private final ClassService classService;
 
-    public HomeworkService(HomeworkRepository homeworkRepository, StudentRepository studentRepository, ClassRepository classRepository, HomeworkMapper homeworkMapper, StudentMapper studentMapper, ClassMapper classMapper) {
+    public HomeworkService(HomeworkRepository homeworkRepository, StudentRepository studentRepository, ClassRepository classRepository, HomeworkMapper homeworkMapper, StudentMapper studentMapper, ClassMapper classMapper, ClassService classService) {
         this.homeworkRepository = homeworkRepository;
         this.studentRepository = studentRepository;
         this.classRepository = classRepository;
         this.homeworkMapper = homeworkMapper;
         this.studentMapper = studentMapper;
         this.classMapper = classMapper;
+        this.classService = classService;
     }
 
     public List<HomeworkModel> list(String principalName) throws ClassNotFoundException {
@@ -114,5 +117,11 @@ public class HomeworkService {
     public void delete(Long id) {
         LOGGER.info("delete(" + id + ")");
         homeworkRepository.deleteById(id);
+    }
+
+    public ClassModel studentClass (String username) throws ClassNotFoundException {
+        StudentEntity studentEntity = studentRepository.findByLogin(username);
+        ClassModel classModel = classService.read(studentEntity.getClazz().getId());
+        return classModel;
     }
 }
