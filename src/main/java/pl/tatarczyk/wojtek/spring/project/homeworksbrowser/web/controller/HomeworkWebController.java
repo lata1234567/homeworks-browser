@@ -3,16 +3,19 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
@@ -32,7 +35,7 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public String list(Model model, Principal principal) {
+    public String list(Model model, Principal principal) throws ClassNotFoundException {
         LOGGER.info("list("+principal+")");
         String principalName = principal.getName();
         List<HomeworkModel> homeworks = homeworkService.list(principalName);
@@ -50,9 +53,17 @@ public class HomeworkWebController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute HomeworkModel homeworkModel) {
+    public String create(
+            @Valid @ModelAttribute HomeworkModel homeworkModel, BindingResult bindingResult,
+            ModelMap modelMap) throws ClassNotFoundException {
         LOGGER.info("create(" + homeworkModel + ")");
 
+        if (bindingResult.hasErrors()) {
+//            LOGGER.info("Errors: " + bindingResult.getAllErrors());
+            modelMap.addAttribute("classes", classService.list());
+            modelMap.addAttribute("operation","create");
+            return "homeworks/manage";
+        }
         homeworkService.create(homeworkModel);
 
         return "redirect:/homeworks";
@@ -77,7 +88,7 @@ public class HomeworkWebController {
     }
 
     @PostMapping(value = "/update")
-    public String update(@ModelAttribute HomeworkModel homeworkModel) {
+    public String update(@ModelAttribute HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("update(" + homeworkModel + ") ");
         homeworkService.update(homeworkModel);
 

@@ -17,20 +17,24 @@
         <div class="mb-3">
             <label for="title" class="form-label">title</label>
             <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="enter title"/>
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Please enter title</p>
         </div>
 
         <div class="mb-3">
             <label for="content" class="form-label">content</label>
             <input type="text" class="form-control" id="content" th:field="*{content}" placeholder="enter content"/>
+            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Please enter title</p>
         </div>
 
         <div class="mb-3">
             <label for="dueDate" class="form-label">dueDate</label>
             <input type="date" dataformatas="yyyy-MM-dd" class="form-control" id="dueDate" th:field="*{dueDate}" placeholder="enter due date"/>
+            <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}">Please enter due date</p>
         </div>
 
         <div>
-            <select name="subject" id="subject">
+<!--            <select name="subject" id="subject" th:field="${subject}">-->
+            <select th:field="*{subject}">
                 <option th:if="${operation == 'create'}"
                         th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
                         th:value="${subject}"
@@ -46,13 +50,16 @@
         </div>
 
         <div>
-            <select name="clazz.id" id="clazz">
+<!--            <select name="clazz.id" id="clazz">-->
+            <select th:field="*{clazz.id}">
+
                 <option th:if="${operation == 'create'}"
                         th:each="clazz : ${classes}"
                         th:value="${clazz.id}"
                         th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>
 
-                <option th:if="${operation == 'update'}" th:each="clazz : ${classes}"
+                <option th:if="${operation == 'update'}"
+                        th:each="clazz : ${classes}"
                         th:value="${clazz.id}"
                         th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"
                         th:selected="${clazz.id == homeworkModel.clazz.id}"></option>

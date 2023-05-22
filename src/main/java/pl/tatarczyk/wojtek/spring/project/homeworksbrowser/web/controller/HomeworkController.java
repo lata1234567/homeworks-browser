@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
@@ -29,14 +30,14 @@ public class HomeworkController {
     }
 
     @GetMapping
-    public List<HomeworkModel> list(Principal principal) {
+    public List<HomeworkModel> list(Principal principal) throws ClassNotFoundException {
         LOGGER.info("list()");
         String principalName = principal.getName();
         return homeworkService.list(principalName);
     }
 
     @PostMapping
-    public HomeworkModel create(@RequestBody HomeworkModel homeworkModel) {
+    public HomeworkModel create(@RequestBody HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("create(" + homeworkModel + ")");
 
         return homeworkService.create(homeworkModel);
@@ -50,7 +51,7 @@ public class HomeworkController {
     }
 
     @PutMapping
-    public HomeworkModel update(@RequestBody HomeworkModel homeworkModel) {
+    public HomeworkModel update(@RequestBody HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("update()");
 
         return homeworkService.update(homeworkModel);

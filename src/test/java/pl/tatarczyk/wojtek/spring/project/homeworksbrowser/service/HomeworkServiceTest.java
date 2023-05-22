@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
@@ -13,7 +14,7 @@ class HomeworkServiceTest {
     private HomeworkService homeworkService;
 
     @Test
-    void create() {
+    void create() throws ClassNotFoundException {
         //Given
         HomeworkModel homeworkModel = new HomeworkModel();
         //When
@@ -37,7 +38,7 @@ class HomeworkServiceTest {
     }
 
     @Test
-    void update() {
+    void update() throws ClassNotFoundException {
         //Given
         HomeworkModel homeworkModel = new HomeworkModel();
         //When

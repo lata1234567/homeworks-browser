@@ -22,15 +22,19 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
 //                        .antMatchers("/", "/home").permitAll()
 //                        .antMatchers("/**").permitAll()
-                                .antMatchers("/homeworks/create").hasAnyRole("USER","ADMIN")
+                                .antMatchers("/homeworks/create").hasAnyRole("USER", "ADMIN")
                                 .antMatchers(HttpMethod.POST, "/students").permitAll()
                                 .antMatchers(HttpMethod.GET, "/students/create").permitAll()
                                 .antMatchers("/students/create/success").permitAll()
+                                .antMatchers("/h2-console/**").permitAll()
 //                                .antMatchers("/homeworks/create").denyAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form.permitAll())
                 .logout((logout) -> logout.permitAll());
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
         return http.build();
     }
