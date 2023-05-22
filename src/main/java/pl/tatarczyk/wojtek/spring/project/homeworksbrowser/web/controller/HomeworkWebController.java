@@ -35,7 +35,7 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public String list(Model model, Principal principal) {
+    public String list(Model model, Principal principal) throws ClassNotFoundException {
         LOGGER.info("list("+principal+")");
         String principalName = principal.getName();
         List<HomeworkModel> homeworks = homeworkService.list(principalName);
@@ -88,7 +88,7 @@ public class HomeworkWebController {
     }
 
     @PostMapping(value = "/update")
-    public String update(@ModelAttribute HomeworkModel homeworkModel) {
+    public String update(@ModelAttribute HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("update(" + homeworkModel + ") ");
         homeworkService.update(homeworkModel);
 

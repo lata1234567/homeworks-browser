@@ -41,12 +41,16 @@ public class HomeworkService {
         this.classMapper = classMapper;
     }
 
-    public List<HomeworkModel> list(String principalName) {
+    public List<HomeworkModel> list(String principalName) throws ClassNotFoundException {
         LOGGER.info("list(" + principalName + ")");
 
         StudentEntity studentEntity = studentRepository.findByLogin(principalName);
         LOGGER.info("studentEntity: " + studentEntity);
-        ClassEntity classEntity = studentEntity.getClazz();
+
+        Long clazzId = studentEntity.getClazz().getId();
+        Optional<ClassEntity> optionalClassEntity = classRepository.findById(clazzId);
+        ClassEntity classEntity = optionalClassEntity.orElseThrow(
+                () -> new ClassNotFoundException("Not found class with id " + clazzId));
 
         List<HomeworkEntity> entities = homeworkRepository.findByClazz_ClassName_NameAndClazzYear(
                 classEntity.getClassName().getName(),classEntity.getYear());
@@ -89,10 +93,17 @@ public class HomeworkService {
         return homeworkModel;
     }
 
-    public HomeworkModel update(HomeworkModel homeworkModel) {
+    public HomeworkModel update(HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("update(" + homeworkModel + ")");
 
         HomeworkEntity mappedHomeworkEntity = homeworkMapper.from(homeworkModel);
+
+        Long clazzId = homeworkModel.getClazz().getId();
+        Optional<ClassEntity> optionalClassEntity = classRepository.findById(clazzId);
+        ClassEntity classEntity = optionalClassEntity.orElseThrow(
+                () -> new ClassNotFoundException("Not found class with id " + clazzId));
+        mappedHomeworkEntity.setClazz(classEntity);
+
         HomeworkEntity updateHomeworkEntity = homeworkRepository.save(mappedHomeworkEntity);
         HomeworkModel mappedHomeworkModel = homeworkMapper.from(updateHomeworkEntity);
 

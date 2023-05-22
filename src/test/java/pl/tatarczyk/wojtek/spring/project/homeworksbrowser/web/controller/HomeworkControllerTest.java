@@ -22,7 +22,7 @@ class HomeworkControllerTest {
     private HomeworkRepository homeworkRepository;
 
     @Test
-    void list() {
+    void list() throws ClassNotFoundException {
         //Given
 
         //When
@@ -33,7 +33,7 @@ class HomeworkControllerTest {
     }
 
     @Test
-    void list1() {
+    void list1() throws ClassNotFoundException {
         //Given
 
         //When
@@ -57,7 +57,7 @@ class HomeworkControllerTest {
     }
 
     @Test
-    void update() {
+    void update() throws ClassNotFoundException {
         //Given
 
         //When

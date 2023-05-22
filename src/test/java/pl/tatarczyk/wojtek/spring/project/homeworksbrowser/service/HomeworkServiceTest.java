@@ -38,7 +38,7 @@ class HomeworkServiceTest {
     }
 
     @Test
-    void update() {
+    void update() throws ClassNotFoundException {
         //Given
         HomeworkModel homeworkModel = new HomeworkModel();
         //When

@@ -30,7 +30,7 @@ public class HomeworkController {
     }
 
     @GetMapping
-    public List<HomeworkModel> list(Principal principal) {
+    public List<HomeworkModel> list(Principal principal) throws ClassNotFoundException {
         LOGGER.info("list()");
         String principalName = principal.getName();
         return homeworkService.list(principalName);
@@ -51,7 +51,7 @@ public class HomeworkController {
     }
 
     @PutMapping
-    public HomeworkModel update(@RequestBody HomeworkModel homeworkModel) {
+    public HomeworkModel update(@RequestBody HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("update()");
 
         return homeworkService.update(homeworkModel);

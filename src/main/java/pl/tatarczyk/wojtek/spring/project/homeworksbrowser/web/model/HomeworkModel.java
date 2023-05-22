@@ -6,6 +6,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSta
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -20,7 +21,7 @@ public class HomeworkModel {
     private String title;
     @NotEmpty(message = "Treść pracy domowej nie może być pusta")
     private String content;
-//    @NotNull(message = "Data wykonania nie może być pusta")
+    @NotNull(message = "Data wykonania nie może być pusta")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
