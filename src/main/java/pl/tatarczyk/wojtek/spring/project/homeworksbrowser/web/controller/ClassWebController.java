@@ -40,7 +40,7 @@ public class ClassWebController {
 
           classService.create(classModel);
 
-          return "classes/add";
+          return "redirect:/classes";
     }
 
     @GetMapping(value="/create")
@@ -79,3 +79,5 @@ public class ClassWebController {
         return "redirect:/classes";
     }
 }
+
+// TODO: 22.05.2023 poprawić nawigację i przekierowanie na widokach związanych z klasą
