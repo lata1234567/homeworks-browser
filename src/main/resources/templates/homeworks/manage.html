@@ -29,7 +29,7 @@
         <div class="mb-3">
             <label for="dueDate" class="form-label">dueDate</label>
             <input type="date" dataformatas="yyyy-MM-dd" class="form-control" id="dueDate" th:field="*{dueDate}" placeholder="enter due date"/>
-            <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}">Please enter due date</p>
+            <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}">Please enwter due date</p>
         </div>
 
         <div>
@@ -53,13 +53,13 @@
 <!--            <select name="clazz.id" id="clazz">-->
             <select th:field="*{clazz.id}">
 
-                <option th:if="${operation == 'create'}"
-                        th:each="clazz : ${classes}"
-                        th:value="${clazz.id}"
-                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>
+<!--                <option th:if="${operation == 'create'}"-->
+<!--                        th:each="clazz : ${classes}"-->
+<!--                        th:value="${clazz.id}"-->
+<!--                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>-->
 
-                <option th:if="${operation == 'update'}"
-                        th:each="clazz : ${classes}"
+<!--                    th:if="${operation == 'update'}"-->
+                <option th:each="clazz : ${classes}"
                         th:value="${clazz.id}"
                         th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"
                         th:selected="${clazz.id == homeworkModel.clazz.id}"></option>

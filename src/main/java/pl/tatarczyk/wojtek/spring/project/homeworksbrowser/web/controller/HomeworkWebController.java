@@ -13,6 +13,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNo
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.ClassService;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.HomeworkService;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.HomeworkModel;
 
 import javax.validation.Valid;
@@ -44,11 +45,18 @@ public class HomeworkWebController {
     }
 
     @GetMapping(value = "/create")
-    public String createView(ModelMap modelMap) {
+    public String createView(ModelMap modelMap, Principal principal) throws ClassNotFoundException {
         LOGGER.info("createView()");
-        modelMap.addAttribute("homeworkModel", new HomeworkModel());
+
+        String principalName = principal.getName();
+        ClassModel classModel = homeworkService.studentClass(principalName);
+        HomeworkModel homeworkModel = new HomeworkModel();
+        homeworkModel.setClazz(classModel);
+
+        modelMap.addAttribute("homeworkModel", homeworkModel);
         modelMap.addAttribute("classes", classService.list());
         modelMap.addAttribute("operation","create");
+
         return "homeworks/manage";
     }
 
