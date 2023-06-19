@@ -37,7 +37,7 @@ public class HomeworkWebController {
 
     @GetMapping
     public String list(Model model, Principal principal) throws ClassNotFoundException {
-        LOGGER.info("list("+principal+")");
+        LOGGER.info("list(" + principal + ")");
         String principalName = principal.getName();
         List<HomeworkModel> homeworks = homeworkService.list(principalName);
         model.addAttribute("homeworks", homeworks);
@@ -55,7 +55,7 @@ public class HomeworkWebController {
 
         modelMap.addAttribute("homeworkModel", homeworkModel);
         modelMap.addAttribute("classes", classService.list());
-        modelMap.addAttribute("operation","create");
+        modelMap.addAttribute("operation", "create");
 
         return "homeworks/manage";
     }
@@ -69,7 +69,7 @@ public class HomeworkWebController {
         if (bindingResult.hasErrors()) {
 //            LOGGER.info("Errors: " + bindingResult.getAllErrors());
             modelMap.addAttribute("classes", classService.list());
-            modelMap.addAttribute("operation","create");
+            modelMap.addAttribute("operation", "create");
             return "homeworks/manage";
         }
         homeworkService.create(homeworkModel);
@@ -91,7 +91,7 @@ public class HomeworkWebController {
         modelMap.addAttribute("classes", classService.list());
 //        modelMap.addAttribute("subjects", homeworkModel.getSubject());
         modelMap.addAttribute("homeworkModel", homeworkModel);
-        modelMap.addAttribute("operation","update");
+        modelMap.addAttribute("operation", "update");
         return "homeworks/manage";
     }
 
@@ -108,6 +108,12 @@ public class HomeworkWebController {
     public String delete(@PathVariable("id") Long id) {
         LOGGER.info("delete()");
         homeworkService.delete(id);
+        return "redirect:/homeworks";
+    }
+
+    @GetMapping(value = "/filter/title")
+    public String filterTitle(String title) {
+        LOGGER.info("filterTitle(" + title + ")");
         return "redirect:/homeworks";
     }
 }

@@ -1,5 +1,6 @@
 package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
@@ -56,7 +57,7 @@ public class HomeworkService {
                 () -> new ClassNotFoundException("Not found class with id " + clazzId));
 
         List<HomeworkEntity> entities = homeworkRepository.findByClazz_ClassName_NameAndClazzYear(
-                classEntity.getClassName().getName(),classEntity.getYear());
+                classEntity.getClassName().getName(), classEntity.getYear());
 
         // TODO: 18.05.2023 zaimplementować pobieranie class entity analogicznie jak w poniższej metodzie create
 
@@ -64,7 +65,7 @@ public class HomeworkService {
         return homeworkMapper.fromEntities(entities);
     }
 
-//    @Transactional
+    //    @Transactional
     public HomeworkModel create(HomeworkModel homeworkModel) throws ClassNotFoundException {
         LOGGER.info("create(" + homeworkModel + ")");
 
@@ -119,9 +120,17 @@ public class HomeworkService {
         homeworkRepository.deleteById(id);
     }
 
-    public ClassModel studentClass (String username) throws ClassNotFoundException {
+    public ClassModel studentClass(String username) throws ClassNotFoundException {
         StudentEntity studentEntity = studentRepository.findByLogin(username);
         ClassModel classModel = classService.read(studentEntity.getClazz().getId());
         return classModel;
+    }
+
+    public List<HomeworkModel> filterTitle(String title) {
+        LOGGER.info("filterTitle(" + title + ")");
+
+        List<HomeworkEntity> homeworkEntities = homeworkRepository.findByTitle(title, PageRequest.of(0, 2));
+
+        return homeworkMapper.fromEntities(homeworkEntities);
     }
 }
