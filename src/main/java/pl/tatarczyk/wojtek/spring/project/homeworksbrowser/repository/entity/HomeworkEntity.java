@@ -35,6 +35,10 @@ public class HomeworkEntity {
     public HomeworkEntity() {
     }
 
+    public HomeworkEntity(String title) {
+        this.title = title;
+    }
+
     public Long getId() {
         return id;
     }

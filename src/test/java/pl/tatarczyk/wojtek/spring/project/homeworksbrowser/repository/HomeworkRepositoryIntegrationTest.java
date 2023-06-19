@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.ClassEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.ClassNameEntity;
@@ -98,5 +99,20 @@ class HomeworkRepositoryIntegrationTest {
         Assertions.assertEquals(SEARCHED_HOMEWORKS_MATH_SIZE_2, searchedMathHomeworks.size());
     }
 
+    @Test
+    void findByTitle() {
+        //Given
 
+        //When
+        homeworkRepository.save(new HomeworkEntity("Trygonometria"));
+        homeworkRepository.save(new HomeworkEntity("Dragnia harmoniczne"));
+        homeworkRepository.save(new HomeworkEntity("Potop"));
+        homeworkRepository.save(new HomeworkEntity("Potop"));
+        homeworkRepository.save(new HomeworkEntity("Potop"));
+
+        List<HomeworkEntity> entities = homeworkRepository.findByTitle("Potop", PageRequest.of(0, 2));
+
+        //Then
+        Assertions.assertEquals(2,entities.size(),"Size not equals");
+    }
 }

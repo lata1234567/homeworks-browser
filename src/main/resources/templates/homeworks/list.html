@@ -22,6 +22,18 @@
     </div>
 
     <div>
+        <form action="#" th:action="@{/homeworks/filter/title}">
+            <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div>
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div>
         <table class="table table-striped">
             <thead>
             <tr>
