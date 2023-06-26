@@ -59,8 +59,6 @@ public class HomeworkService {
         List<HomeworkEntity> entities = homeworkRepository.findByClazz_ClassName_NameAndClazzYear(
                 classEntity.getClassName().getName(), classEntity.getYear());
 
-        // TODO: 18.05.2023 zaimplementować pobieranie class entity analogicznie jak w poniższej metodzie create
-
         LOGGER.info("list(...) = " + entities);
         return homeworkMapper.fromEntities(entities);
     }
@@ -130,6 +128,14 @@ public class HomeworkService {
         LOGGER.info("filterTitle(" + title + ")");
 
         List<HomeworkEntity> homeworkEntities = homeworkRepository.findByTitle(title, PageRequest.of(0, 2));
+
+        return homeworkMapper.fromEntities(homeworkEntities);
+    }
+
+    public List<HomeworkModel> search(String keyword) {
+        LOGGER.info("search(" + keyword + ")");
+
+        List<HomeworkEntity> homeworkEntities = homeworkRepository.search(keyword);
 
         return homeworkMapper.fromEntities(homeworkEntities);
     }

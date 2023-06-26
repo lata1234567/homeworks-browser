@@ -36,7 +36,7 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public String list(Model model, Principal principal) throws ClassNotFoundException {
+    public String list(Model model, Principal principal, String keyword) throws ClassNotFoundException {
         LOGGER.info("list(" + principal + ")");
         String principalName = principal.getName();
         List<HomeworkModel> homeworks = homeworkService.list(principalName);
@@ -111,9 +111,12 @@ public class HomeworkWebController {
         return "redirect:/homeworks";
     }
 
-    @GetMapping(value = "/filter/title")
-    public String filterTitle(String title) {
-        LOGGER.info("filterTitle(" + title + ")");
+    @GetMapping(value = "/filter/keyword")
+    public String filterKeyword(String keyword) {
+        LOGGER.info("filterKeyword(" + keyword + ")");
+
+        homeworkService.search(keyword);
+
         return "redirect:/homeworks";
     }
 }
