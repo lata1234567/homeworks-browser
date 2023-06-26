@@ -10,7 +10,7 @@
 <div class="container-fluid">
     <h1>List of Homeworks</h1>
 
-    <div th:replace="fragments/header :: header">a</div>
+    <div th:replace="fragments/header :: header">header</div>
 
     <div>
         <span>
@@ -69,6 +69,8 @@
             </tbody>
         </table>
     </div>
+
+    <div th:replace="fragments/footer :: footer">footer</div>
 </div>
 </body>
 </html>
