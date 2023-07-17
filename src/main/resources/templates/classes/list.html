@@ -7,40 +7,47 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
-<div class="container-fluid">
-    <h1>List of Classes</h1>
 
-    <div>
-        <span>
-            <a href="#" th:href="@{/classes/create}">add student</a>
-        </span>
-        <span>
-            <a href="#" th:href="@{/dashboard}">dashboard</a>
-        </span>
-    </div>
+<div th:replace="fragments/header :: header">header</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1>List of Classes</h1>
 
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Class Name</th>
-                <th scope="col">Year</th>
-                <th scope="col">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="class, status : ${classes}">
-                <th scope="row" th:text="${status.count}">1</th>
-                <td th:text="${class.className.getName()}"></td>
-                <td th:text="${class.year}"></td>
-                <td>
-                    <a href="#" th:href="@{/classes/delete/{id}(id = ${class.id})}">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div>
+        <span>
+            <a href="#" class="btn btn-secondary" th:href="@{/classes/create}">add student</a>
+        </span>
+            <span>
+            <a href="#" class="btn btn-secondary" th:href="@{/dashboard}">dashboard</a>
+        </span>
+        </div>
+
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Class Name</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="class, status : ${classes}">
+                    <th scope="row" th:text="${status.count}">1</th>
+                    <td th:text="${class.className.getName()}"></td>
+                    <td th:text="${class.year}"></td>
+                    <td>
+                        <a href="#" th:href="@{/classes/delete/{id}(id = ${class.id})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+</main>
+
+<div th:replace="fragments/footer :: footer">footer</div>
+
 </body>
 </html>
