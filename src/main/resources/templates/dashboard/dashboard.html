@@ -7,70 +7,75 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
-<h1>Welcome in dashboard</h1>
-<div>
 
-    <div th:replace="fragments/header :: header">a</div>
+<div th:replace="fragments/header :: header">a</div>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">List</th>
-            <th scope="col">Create</th>
-        </tr>
-        </thead>
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1>Welcome in dashboard</h1>
 
-        <tbody>
-        <tr>
-            <th scope="row" >1</th>
-            <td>
-                <a href="#" th:href="@{/homeworks}">homeworks list</a>
-            </td>
-            <td>
-                <a href="#" th:href="@{/homeworks/create}">create homework</a>
-            </td>
-        </tr>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">List</th>
+                <th scope="col">Create</th>
+            </tr>
+            </thead>
 
-        <tr>
-            <th scope="row">2</th>
-            <td>
-                <a href="#" th:href="@{/students}">students list</a>
-            </td>
-            <td>
-                <a href="#" th:href="@{/students/create}">create students</a>
-            </td>
-        </tr>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>
+                    <a href="#" class="btn btn-secondary" th:href="@{/homeworks}">homeworks list</a>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-secondary" th:href="@{/homeworks/create}">create homework</a>
+                </td>
+            </tr>
 
-        <tr>
-            <th scope="row">3</th>
-            <td>
-            <a href="#" th:href="@{/classes}">classes list</a>
-            </td>
-<!--            <div sec:authorize="hasRole('ROLE_ADMIN')">-->
-<!--                This will only be displayed if authenticated user has role ROLE_ADMIN.-->
-<!--            </div>-->
-            <td>
+            <tr>
+                <th scope="row">2</th>
+                <td>
+                    <a href="#" class="btn btn-secondary" th:href="@{/students}">students list</a>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-secondary" th:href="@{/students/create}">create students</a>
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">3</th>
+                <td>
+                    <a href="#" class="btn btn-secondary" th:href="@{/classes}">classes list</a>
+                </td>
+                <!--            <div sec:authorize="hasRole('ROLE_ADMIN')">-->
+                <!--                This will only be displayed if authenticated user has role ROLE_ADMIN.-->
+                <!--            </div>-->
+                <td>
                 <span sec:authorize="hasRole('ROLE_ADMIN')">
-                <a href="#" th:href="@{/classes/create}">create class</a>
+                <a href="#" class="btn btn-secondary" th:href="@{/classes/create}">create class</a>
                 </span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-<!--    <div>-->
-<!--        <a href="#" th:href="@{/homeworks}">homeworks list</a>-->
-<!--    </div>-->
+        <!--    <div>-->
+        <!--        <a href="#" th:href="@{/homeworks}">homeworks list</a>-->
+        <!--    </div>-->
 
-<!--    <div>-->
-<!--        <a href="#" th:href="@{/students}">students list</a>-->
-<!--    </div>-->
+        <!--    <div>-->
+        <!--        <a href="#" th:href="@{/students}">students list</a>-->
+        <!--    </div>-->
 
-<!--    <div>-->
-<!--        <a href="#" th:href="@{/classes}">classes list</a>-->
-<!--    </div>-->
+        <!--    <div>-->
+        <!--        <a href="#" th:href="@{/classes}">classes list</a>-->
+        <!--    </div>-->
+    </div>
+</main>
 
-</div>
+<div th:replace="fragments/footer :: footer">footer</div>
+
 </body>
 </html>
