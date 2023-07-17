@@ -8,86 +8,96 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
-<div class="container-fluid">
-    <h1 th:if="${operation == 'create'}">Create new homework</h1>
-    <h1 th:if="${operation == 'update'}">Update homework</h1>
 
-    <form action="#" th:action="${operation} == 'create' ? @{/homeworks} : @{/homeworks/update}" th:object="${homeworkModel}" method="post">
+<div th:replace="fragments/header :: header">header</div>
 
-        <div class="mb-3">
-            <label for="title" class="form-label">title</label>
-            <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="enter title"/>
-            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Please enter title</p>
-        </div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1 th:if="${operation == 'create'}">Create new homework</h1>
+        <h1 th:if="${operation == 'update'}">Update homework</h1>
 
-        <div class="mb-3">
-            <label for="content" class="form-label">content</label>
-            <input type="text" class="form-control" id="content" th:field="*{content}" placeholder="enter content"/>
-            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Please enter title</p>
-        </div>
+        <form action="#" th:action="${operation} == 'create' ? @{/homeworks} : @{/homeworks/update}"
+              th:object="${homeworkModel}" method="post">
 
-        <div class="mb-3">
-            <label for="dueDate" class="form-label">dueDate</label>
-            <input type="date" dataformatas="yyyy-MM-dd" class="form-control" id="dueDate" th:field="*{dueDate}" placeholder="enter due date"/>
-            <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}">Please enwter due date</p>
-        </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">title</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="enter title"/>
+                <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Please enter title</p>
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class="form-label">content</label>
+                <input type="text" class="form-control" id="content" th:field="*{content}" placeholder="enter content"/>
+                <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Please enter title</p>
+            </div>
+
+            <div class="mb-3">
+                <label for="dueDate" class="form-label">dueDate</label>
+                <input type="date" dataformatas="yyyy-MM-dd" class="form-control" id="dueDate" th:field="*{dueDate}"
+                       placeholder="enter due date"/>
+                <p th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}">Please enwter due date</p>
+            </div>
+
+            <div>
+                <!--            <select name="subject" id="subject" th:field="${subject}">-->
+                <select th:field="*{subject}">
+                    <option th:if="${operation == 'create'}"
+                            th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
+                            th:value="${subject}"
+                            th:text="${subject.getName()}"></option>
+
+                    <option th:if="${operation == 'update'}"
+                            th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
+                            th:value="${subject}"
+                            th:text="${subject.getName()}"
+                            th:selected="${subject == homeworkModel.subject}"></option>
+                </select>
+
+            </div>
+
+            <div>
+                <!--            <select name="clazz.id" id="clazz">-->
+                <select th:field="*{clazz.id}">
+
+                    <!--                <option th:if="${operation == 'create'}"-->
+                    <!--                        th:each="clazz : ${classes}"-->
+                    <!--                        th:value="${clazz.id}"-->
+                    <!--                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>-->
+
+                    <!--                    th:if="${operation == 'update'}"-->
+                    <option th:each="clazz : ${classes}"
+                            th:value="${clazz.id}"
+                            th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"
+                            th:selected="${clazz.id == homeworkModel.clazz.id}"></option>
+                </select>
+            </div>
+
+            <div>
+                <select th:if="${operation == 'update'}" name="status" id="status">
+                    <option th:each="status : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus).values()}"
+                            th:value="${status}"
+                            th:text="${status.getName()}"
+                            th:selected="${status == homeworkModel.status}"></option>
+                </select>
+
+            </div>
+
+            <div>
+                <input type="hidden" th:field="*{id}">
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
 
         <div>
-<!--            <select name="subject" id="subject" th:field="${subject}">-->
-            <select th:field="*{subject}">
-                <option th:if="${operation == 'create'}"
-                        th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
-                        th:value="${subject}"
-                        th:text="${subject.getName()}"></option>
-
-                <option th:if="${operation == 'update'}"
-                        th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
-                        th:value="${subject}"
-                        th:text="${subject.getName()}"
-                        th:selected="${subject == homeworkModel.subject}"></option>
-            </select>
-
+            <a href="#" class="btn btn-secondary" th:href="@{/homeworks}">homeworks list</a>
         </div>
-
-        <div>
-<!--            <select name="clazz.id" id="clazz">-->
-            <select th:field="*{clazz.id}">
-
-<!--                <option th:if="${operation == 'create'}"-->
-<!--                        th:each="clazz : ${classes}"-->
-<!--                        th:value="${clazz.id}"-->
-<!--                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>-->
-
-<!--                    th:if="${operation == 'update'}"-->
-                <option th:each="clazz : ${classes}"
-                        th:value="${clazz.id}"
-                        th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"
-                        th:selected="${clazz.id == homeworkModel.clazz.id}"></option>
-            </select>
-        </div>
-
-        <div>
-            <select th:if="${operation == 'update'}" name="status" id="status">
-                <option th:each="status : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus).values()}"
-                        th:value="${status}"
-                        th:text="${status.getName()}"
-                        th:selected="${status == homeworkModel.status}"></option>
-            </select>
-
-        </div>
-
-        <div>
-            <input type="hidden" th:field="*{id}">
-        </div>
-
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-    </form>
-
-    <div>
-        <a href="#" th:href="@{/homeworks}">homeworks list</a>
     </div>
-</div>
+</main>
+
+<div th:replace="fragments/footer :: footer">footer</div>
+
 </body>
 </html>

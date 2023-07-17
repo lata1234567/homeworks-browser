@@ -7,37 +7,46 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
-<div class="container-fluid">
-    <h1>Create new class</h1>
 
-    <div>
-        <a href="#" th:href="@{/classes}">list of classes</a>
-    </div>
+<div th:replace="fragments/header :: header">header</div>
 
-    <form action="/classes" th:object="${classModel}" method="post">
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Class Name</label>
-            <input type="text" class="form-control" id="name" th:field="*{className.name}" placeholder="enter name"/>
-        </div>
-
-        <div class="mb-3">
-            <label for="year" class="form-label">year</label>
-            <input type="text" class="form-control" id="year" th:field="*{year}" placeholder="enter year"/>
-        </div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1>Create new class</h1>
 
         <div>
-            <input type="hidden" th:field="*{id}">
+            <a href="#" class="btn btn-secondary" th:href="@{/classes}">list of classes</a>
         </div>
 
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-    </form>
+        <form action="/classes" th:object="${classModel}" method="post">
 
-<!--    <div>-->
-<!--        <a href="#" th:href="@{}">classes list</a>-->
-<!--    </div>-->
-</div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Class Name</label>
+                <input type="text" class="form-control" id="name" th:field="*{className.name}"
+                       placeholder="enter name"/>
+            </div>
+
+            <div class="mb-3">
+                <label for="year" class="form-label">year</label>
+                <input type="text" class="form-control" id="year" th:field="*{year}" placeholder="enter year"/>
+            </div>
+
+            <div>
+                <input type="hidden" th:field="*{id}">
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+
+        <!--    <div>-->
+        <!--        <a href="#" th:href="@{}">classes list</a>-->
+        <!--    </div>-->
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footer">footer</div>
+
 </body>
 </html>
