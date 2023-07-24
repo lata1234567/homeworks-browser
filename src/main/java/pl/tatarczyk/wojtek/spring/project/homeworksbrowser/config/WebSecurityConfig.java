@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.StudentRole;
 
 @Configuration
 @EnableWebSecurity
@@ -22,7 +23,9 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
 //                        .antMatchers("/", "/home").permitAll()
 //                        .antMatchers("/**").permitAll()
-                                .antMatchers("/homeworks/create").hasAnyRole("USER", "ADMIN")
+                                .antMatchers("/homeworks/create").hasAnyRole(
+                                        StudentRole.USER.getName(),
+                                        StudentRole.ADMIN.getName())
                                 .antMatchers(HttpMethod.POST, "/students").permitAll()
                                 .antMatchers(HttpMethod.GET, "/students/create").permitAll()
                                 .antMatchers("/students/create/success").permitAll()
