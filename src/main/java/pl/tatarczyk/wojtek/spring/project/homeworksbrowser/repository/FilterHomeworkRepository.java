@@ -30,8 +30,9 @@ public class FilterHomeworkRepository {
         Root<HomeworkEntity> entityRoot = criteriaQuery.from(HomeworkEntity.class);
 
         Predicate titlePredicate = criteriaBuilder.like(entityRoot.get("title"), title);
+        Predicate classPredicate = criteriaBuilder.equal(entityRoot.get("clazz").get("id"), classModel.getId());
 
-        criteriaQuery.where(criteriaBuilder.and(titlePredicate));
+        criteriaQuery.where(criteriaBuilder.and(titlePredicate, classPredicate));
         List<HomeworkEntity> homeworkEntities = entityManager.createQuery(criteriaQuery.select(entityRoot)).getResultList();
 
         LOGGER.info("filter(...) = " + homeworkEntities);
