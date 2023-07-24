@@ -6,6 +6,7 @@ import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.ClassNo
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.exception.HomeworkNotFoundException;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.ClassRepository;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.FilterHomeworkRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.HomeworkRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.StudentRepository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.ClassEntity;
@@ -28,6 +29,7 @@ public class HomeworkService {
     private static final Logger LOGGER = Logger.getLogger(HomeworkService.class.getName());
 
     private final HomeworkRepository homeworkRepository;
+    private final FilterHomeworkRepository filterHomeworkRepository;
     private final StudentRepository studentRepository;
     private final ClassRepository classRepository;
     private final HomeworkMapper homeworkMapper;
@@ -35,8 +37,9 @@ public class HomeworkService {
     private final ClassMapper classMapper;
     private final ClassService classService;
 
-    public HomeworkService(HomeworkRepository homeworkRepository, StudentRepository studentRepository, ClassRepository classRepository, HomeworkMapper homeworkMapper, StudentMapper studentMapper, ClassMapper classMapper, ClassService classService) {
+    public HomeworkService(HomeworkRepository homeworkRepository, FilterHomeworkRepository filterHomeworkRepository, StudentRepository studentRepository, ClassRepository classRepository, HomeworkMapper homeworkMapper, StudentMapper studentMapper, ClassMapper classMapper, ClassService classService) {
         this.homeworkRepository = homeworkRepository;
+        this.filterHomeworkRepository = filterHomeworkRepository;
         this.studentRepository = studentRepository;
         this.classRepository = classRepository;
         this.homeworkMapper = homeworkMapper;
@@ -132,10 +135,10 @@ public class HomeworkService {
         return homeworkMapper.fromEntities(homeworkEntities);
     }
 
-    public List<HomeworkModel> search(String keyword) {
+    public List<HomeworkModel> search(String keyword, ClassModel classModel) {
         LOGGER.info("search(" + keyword + ")");
 
-        List<HomeworkEntity> homeworkEntities = homeworkRepository.search(keyword);
+        List<HomeworkEntity> homeworkEntities = filterHomeworkRepository.filter(keyword, classModel);
 
         return homeworkMapper.fromEntities(homeworkEntities);
     }

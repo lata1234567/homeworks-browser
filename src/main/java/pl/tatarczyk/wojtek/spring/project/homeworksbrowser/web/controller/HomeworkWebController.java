@@ -112,14 +112,20 @@ public class HomeworkWebController {
     }
 
     @GetMapping(value = "/filter/keyword")
-    public String filterKeyword(String keyword) {
+    public String filterKeyword(String keyword, Principal principal, Model model) throws ClassNotFoundException {
         LOGGER.info("filterKeyword(" + keyword + ")");
 
-        homeworkService.search(keyword);
+        String principalName = principal.getName();
+        ClassModel classModel = homeworkService.studentClass(principalName);
 
-        return "redirect:/homeworks";
+        List<HomeworkModel> homeworks = homeworkService.search(keyword, classModel);
+        model.addAttribute("homeworks", homeworks);
+
+//        return "redirect:/homeworks";
+        return "homeworks/list";
     }
 }
 
-// TODO: 17.07.2023 Dodać layout dla select/option w html
+// TODO: 17.07.2023 Dodać layout dla select/option w html\
+// TODO: 24.07.2023 dodać przycisk odświerzania listy homeworków
 

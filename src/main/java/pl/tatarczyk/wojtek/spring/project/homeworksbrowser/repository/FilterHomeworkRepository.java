@@ -2,6 +2,7 @@ package pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.web.model.ClassModel;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -21,19 +22,21 @@ public class FilterHomeworkRepository {
         this.entityManager = entityManager;
     }
 
-    public void filter(String title) {
+    public List<HomeworkEntity> filter(String title, ClassModel classModel) {
         LOGGER.info("filter(" + title + ")");
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<HomeworkEntity> criteriaQuery = criteriaBuilder.createQuery(HomeworkEntity.class);
         Root<HomeworkEntity> entityRoot = criteriaQuery.from(HomeworkEntity.class);
 
-        Predicate titlePredicate = criteriaBuilder.equal(entityRoot.get("title"), title);
+        Predicate titlePredicate = criteriaBuilder.like(entityRoot.get("title"), title);
 
         criteriaQuery.where(criteriaBuilder.and(titlePredicate));
         List<HomeworkEntity> homeworkEntities = entityManager.createQuery(criteriaQuery.select(entityRoot)).getResultList();
 
         LOGGER.info("filter(...) = " + homeworkEntities);
+
+        return homeworkEntities;
 
 //        LocalDate today = new LocalDate();
 //
