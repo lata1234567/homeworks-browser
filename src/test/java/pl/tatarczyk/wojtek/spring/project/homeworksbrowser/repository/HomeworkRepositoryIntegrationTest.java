@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
+import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.ClassEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.ClassNameEntity;
 import pl.tatarczyk.wojtek.spring.project.homeworksbrowser.repository.entity.HomeworkEntity;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @SpringBootTest
 class HomeworkRepositoryIntegrationTest {
+
+    private static final int SEARCHED_HOMEWORKS_MATH_SIZE_2 = 2;
 
     @Autowired
     private HomeworkRepository homeworkRepository;
@@ -59,6 +62,41 @@ class HomeworkRepositoryIntegrationTest {
         //Then
         Assertions.assertNotNull(byYearAndClazz_className_name,"byYearAndClazz_className_name is null");
 
+    }
+
+    @Test
+    void search() {
+        // given
+        HomeworkEntity simpleHomeworkEntity = new HomeworkEntity();
+        simpleHomeworkEntity.setSubject(HomeworkSubject.MATEMATYKA);
+        simpleHomeworkEntity.setTitle("Simple Math Homework");
+        simpleHomeworkEntity.setContent("Simple Content: Equations and Formulas");
+
+        HomeworkEntity complexHomeworkEntity = new HomeworkEntity();
+        complexHomeworkEntity.setSubject(HomeworkSubject.MATEMATYKA);
+        complexHomeworkEntity.setTitle("Complex Math Homework");
+        complexHomeworkEntity.setContent("Complex Content: Integrals and Derivatives");
+
+        HomeworkEntity littleHomeworkEntity = new HomeworkEntity();
+        littleHomeworkEntity.setSubject(HomeworkSubject.J_POLSKI);
+        littleHomeworkEntity.setTitle("Mała praca domowa");
+        littleHomeworkEntity.setContent("Treść: Fraszki i Bajki");
+
+        HomeworkEntity niceHomeworkEntity = new HomeworkEntity();
+        niceHomeworkEntity.setSubject(HomeworkSubject.J_POLSKI);
+        niceHomeworkEntity.setTitle("Miła homework");
+        niceHomeworkEntity.setContent("Content: Miód i Honey");
+
+        // when
+        homeworkRepository.save(simpleHomeworkEntity);
+        homeworkRepository.save(complexHomeworkEntity);
+        homeworkRepository.save(littleHomeworkEntity);
+        homeworkRepository.save(niceHomeworkEntity);
+
+        List<HomeworkEntity> searchedMathHomeworks = homeworkRepository.search("MaTh");
+
+        // then
+        Assertions.assertEquals(SEARCHED_HOMEWORKS_MATH_SIZE_2, searchedMathHomeworks.size());
     }
 
     @Test
