@@ -24,6 +24,11 @@
         </div>
 
         <div>
+<!--            <form class="d-flex" role="search" action="#" th:action="@{/homeworks/filter/title}">-->
+<!--                <input name="title" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            </form>-->
+
             <form action="#" th:action="@{/homeworks/filter/title}">
                 <div>
                     <label for="title">Title</label>
@@ -62,10 +67,10 @@
                     </td>
                     <td th:text="${homework?.status?.name}"></td>
                     <td>
-                        <a href="#" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
+                        <a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
                     </td>
                     <td>
-                        <a href="#" th:href="@{homeworks/update/{id}(id = ${homework.id})}">Update</a>
+                        <a href="#" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{homeworks/update/{id}(id = ${homework.id})}">Update</a>
                     </td>
                 </tr>
                 </tbody>

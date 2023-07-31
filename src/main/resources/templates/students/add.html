@@ -41,7 +41,7 @@
             </div>
 
             <div>
-                <select name="clazz.id" id="clazz">
+                <select name="clazz.id" id="clazz" class="form-select">
                     <option th:each="clazz : ${classes}"
                             th:value="${clazz.id}"
                             th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(clazz)}"></option>
