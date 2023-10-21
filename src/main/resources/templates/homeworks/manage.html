@@ -40,7 +40,7 @@
 
             <div>
                 <!--            <select name="subject" id="subject" th:field="${subject}">-->
-                <select th:field="*{subject}">
+                <select th:field="*{subject}" class="form-select">
                     <option th:if="${operation == 'create'}"
                             th:each="subject : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkSubject).values()}"
                             th:value="${subject}"
@@ -57,7 +57,7 @@
 
             <div>
                 <!--            <select name="clazz.id" id="clazz">-->
-                <select th:field="*{clazz.id}">
+                <select th:field="*{clazz.id}" class="form-select">
 
                     <!--                <option th:if="${operation == 'create'}"-->
                     <!--                        th:each="clazz : ${classes}"-->
@@ -73,7 +73,7 @@
             </div>
 
             <div>
-                <select th:if="${operation == 'update'}" name="status" id="status">
+                <select th:if="${operation == 'update'}" name="status" id="status" class="form-select">
                     <option th:each="status : ${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.api.model.HomeworkStatus).values()}"
                             th:value="${status}"
                             th:text="${status.getName()}"

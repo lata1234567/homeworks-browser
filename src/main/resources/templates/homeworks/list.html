@@ -14,7 +14,7 @@
     <div class="container">
         <h1>List of Homeworks</h1>
 
-        <div>
+        <div class="form-group mb-2">
         <span>
             <a href="#" class="btn btn-secondary" th:href="@{/homeworks/create}">add homework</a>
         </span>
@@ -23,16 +23,21 @@
         </span>
         </div>
 
-        <div>
-            <form action="#" th:action="@{/homeworks/filter/keyword}">
-                <div>
-                    <label for="keyword">Title</label>
-                    <input type="text" name="keyword" id="keyword">
-                </div>
-                <div>
-                    <button type="submit">Search</button>
-                </div>
+        <div class="form-group mb-2">
+            <form class="d-flex" role="search" action="#" th:action="@{/homeworks/filter/keyword}">
+                <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+
+<!--            <form action="#" th:action="@{/homeworks/filter/keyword}">-->
+<!--                <div>-->
+<!--                    <label for="keyword">Title</label>-->
+<!--                    <input type="text" name="keyword" id="keyword">-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <button type="submit">Search</button>-->
+<!--                </div>-->
+<!--            </form>-->
         </div>
 
         <div>
@@ -62,10 +67,10 @@
                     </td>
                     <td th:text="${homework?.status?.name}"></td>
                     <td>
-                        <a href="#" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
+                        <a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/homeworks/delete/{id}(id = ${homework.id})}">Delete</a>
                     </td>
                     <td>
-                        <a href="#" th:href="@{homeworks/update/{id}(id = ${homework.id})}">Update</a>
+                        <a href="#" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{homeworks/update/{id}(id = ${homework.id})}">Update</a>
                     </td>
                 </tr>
                 </tbody>
