@@ -52,6 +52,10 @@
                         <input name="keyword" class="form-control me-2" type="text" placeholder="Search by class name" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+                    <form class="d-flex" role="search" th:if="${typeOfPage =='listOfStudents'}" action="#" th:action="@{/students/filter/keyword}">
+                        <input name="keyword" class="form-control me-2" type="text" placeholder="Search by surname" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
 <!--                    <form class="d-flex" role="search" th:if="${typeOfPage =='listOfHomework'}">-->
 <!--                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
 <!--                        <button class="btn btn-outline-success" type="submit">Search</button>-->

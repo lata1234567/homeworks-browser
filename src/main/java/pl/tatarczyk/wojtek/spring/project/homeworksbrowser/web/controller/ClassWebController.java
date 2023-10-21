@@ -82,7 +82,7 @@ public class ClassWebController {
 
     @GetMapping(value = "/filter/keyword")
     public String filterKeyword(ModelMap modelMap, Model model, String keyword) {
-        LOGGER.info("list(" + keyword + ")");
+        LOGGER.info("filterKeyword(" + keyword + ")");
         List<ClassModel> classes = classService.search(keyword);
         model.addAttribute("classes", classes);
         modelMap.addAttribute("typeOfPage", "listOfClasses");

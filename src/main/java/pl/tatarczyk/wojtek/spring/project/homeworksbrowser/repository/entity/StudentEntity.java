@@ -26,6 +26,10 @@ public class StudentEntity {
     public StudentEntity() {
     }
 
+    public StudentEntity(String surname) {
+        this.surname = surname;
+    }
+
     public Long getId() {
         return id;
     }
