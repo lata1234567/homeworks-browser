@@ -76,4 +76,12 @@ public class ClassService {
         LOGGER.info("delete(" + id + ")");
         classRepository.deleteById(id);
     }
+
+    public List<ClassModel> search(String title){
+        LOGGER.info("search("+title+")");
+
+        List<ClassEntity> classEntities = classRepository.findByClassName_Name(title);
+
+        return classMapper.formEntities(classEntities);
+    }
 }

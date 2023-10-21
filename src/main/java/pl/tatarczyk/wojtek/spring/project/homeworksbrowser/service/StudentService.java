@@ -82,4 +82,12 @@ public class StudentService {
         LOGGER.info("delete(" + id + ")");
         studentRepository.deleteById(id);
     }
+
+    public List<StudentModel> search(String surname) {
+        LOGGER.info("search("+surname+")");
+
+        List<StudentEntity> studentEntities = studentRepository.findBySurname(surname);
+
+        return studentMapper.fromEntities(studentEntities);
+    }
 }

@@ -31,10 +31,11 @@ public class StudentWebController {
     }
 
     @GetMapping
-    public String list(Model model) {
+    public String list(ModelMap modelMap, Model model) {
         LOGGER.info("list()");
         List<StudentModel> students = studentService.list();
         model.addAttribute("students", students);
+        modelMap.addAttribute("typeOfPage", "listOfStudents");
         return "students/list";
     }
 
@@ -91,4 +92,12 @@ public class StudentWebController {
         return "redirect:/students";
     }
 
+    @GetMapping(value = "/filter/keyword")
+    public String list(Model model, ModelMap modelMap, String keyword) {
+        LOGGER.info("filterKeyword(" + keyword + ")");
+        List<StudentModel> students = studentService.search(keyword);
+        model.addAttribute("students", students);
+        modelMap.addAttribute("typeOfPage", "listOfStudents");
+        return "students/list";
+    }
 }

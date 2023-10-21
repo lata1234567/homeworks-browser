@@ -36,11 +36,12 @@ public class HomeworkWebController {
     }
 
     @GetMapping
-    public String list(Model model, Principal principal, String keyword) throws ClassNotFoundException {
+    public String list(ModelMap modelMap, Model model, Principal principal, String keyword) throws ClassNotFoundException {
         LOGGER.info("list(" + principal + ")");
         String principalName = principal.getName();
         List<HomeworkModel> homeworks = homeworkService.list(principalName);
         model.addAttribute("homeworks", homeworks);
+        modelMap.addAttribute("typeOfPage", "listOfHomework" );
         return "homeworks/list";
     }
 
@@ -112,7 +113,7 @@ public class HomeworkWebController {
     }
 
     @GetMapping(value = "/filter/keyword")
-    public String filterKeyword(String keyword, Principal principal, Model model) throws ClassNotFoundException {
+    public String filterKeyword(ModelMap modelMap, String keyword, Principal principal, Model model) throws ClassNotFoundException {
         LOGGER.info("filterKeyword(" + keyword + ")");
 
         String principalName = principal.getName();
@@ -120,12 +121,14 @@ public class HomeworkWebController {
 
         List<HomeworkModel> homeworks = homeworkService.search(keyword, classModel);
         model.addAttribute("homeworks", homeworks);
+        modelMap.addAttribute("typeOfPage", "listOfHomework" );
 
 //        return "redirect:/homeworks";
         return "homeworks/list";
     }
 }
 
-// TODO: 17.07.2023 Dodać layout dla select/option w html\
 // TODO: 24.07.2023 dodać przycisk odświerzania listy homeworków
+// TODO: 21.10.2023 metoda wyszukiwania studentów po nazwisku
+// TODO: 21.10.2023 metoda wyszukiwania class po nazwie klasy
 
