@@ -38,7 +38,7 @@
                     <td th:text="${class.className.getName()}"></td>
                     <td th:text="${class.year}"></td>
                     <td>
-                        <a href="#" th:href="@{/classes/delete/{id}(id = ${class.id})}">Delete</a>
+                        <a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/classes/delete/{id}(id = ${class.id})}">Delete</a>
                     </td>
                 </tr>
                 </tbody>

@@ -45,7 +45,7 @@
                     <td th:text="${T(pl.tatarczyk.wojtek.spring.project.homeworksbrowser.service.decorator.ClassDecorator).decorate(student.clazz)}">
                     </td>
                     <td>
-                        <a href="#" th:href="@{/students/delete/{id}(id = ${student.id})}">Delete</a>
+                        <a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/students/delete/{id}(id = ${student.id})}">Delete</a>
                     </td>
                 </tr>
                 </tbody>

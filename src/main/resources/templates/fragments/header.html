@@ -49,10 +49,10 @@
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                     <div class="navbar-nav">
-                        <span class="nav-item">Welcome, </span>
-                        <span class="nav-item" th:text="${#authentication.name}"></span>.
+                        <span class="text-white nav-item">Welcome, </span>
+                        <span class="text-white nav-item" th:text="${#authentication.name}"></span>.
                         <span class="nav-item">
-                            <a href="#" th:href="@{/logout}">Logout</a>
+                            <a href="#" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" th:href="@{/logout}">Logout</a>
                         </span>
                     </div>
                 </div>
