@@ -17,7 +17,9 @@ public class ClassEntity {
     public ClassEntity() {
     }
 
-
+    public ClassEntity(ClassNameEntity className) {
+        this.className = className;
+    }
 
     public Long getId() {
         return id;

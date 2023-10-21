@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
-@RequestMapping(value="/classes")
+@RequestMapping(value = "/classes")
 public class ClassWebController {
     private static final Logger LOGGER = Logger.getLogger(ClassWebController.class.getName());
 
@@ -27,32 +27,33 @@ public class ClassWebController {
     }
 
     @GetMapping
-    public String list(Model model){
+    public String list(ModelMap modelMap, Model model) {
         LOGGER.info("list()");
         List<ClassModel> classes = classService.list();
-        model.addAttribute("classes",classes);
+        model.addAttribute("classes", classes);
+        modelMap.addAttribute("typeOfPage", "listOfClasses");
         return "classes/list";
     }
 
     @PostMapping
-    public String create(@ModelAttribute ClassModel classModel){
-          LOGGER.info("create(" + classModel + ")");
+    public String create(@ModelAttribute ClassModel classModel) {
+        LOGGER.info("create(" + classModel + ")");
 
-          classService.create(classModel);
+        classService.create(classModel);
 
-          return "redirect:/classes";
+        return "redirect:/classes";
     }
 
-    @GetMapping(value="/create")
-    public String createView(ModelMap modelMap){
+    @GetMapping(value = "/create")
+    public String createView(ModelMap modelMap) {
         LOGGER.info("createView()");
-        modelMap.addAttribute("classModel",new ClassModel());
+        modelMap.addAttribute("classModel", new ClassModel());
 
         return "classes/add";
     }
 
-    @GetMapping(value="/{id}")
-    public ClassModel read(@PathVariable("id") Long id) throws ClassNotFoundException{
+    @GetMapping(value = "/{id}")
+    public ClassModel read(@PathVariable("id") Long id) throws ClassNotFoundException {
         LOGGER.info("read()");
 
         return classService.read(id);
@@ -78,6 +79,13 @@ public class ClassWebController {
         classService.delete(id);
         return "redirect:/classes";
     }
-}
 
-// TODO: 22.05.2023 poprawić nawigację i przekierowanie na widokach związanych z klasą
+    @GetMapping(value = "/filter/keyword")
+    public String filterKeyword(ModelMap modelMap, Model model, String keyword) {
+        LOGGER.info("list(" + keyword + ")");
+        List<ClassModel> classes = classService.search(keyword);
+        model.addAttribute("classes", classes);
+        modelMap.addAttribute("typeOfPage", "listOfClasses");
+        return "classes/list";
+    }
+}

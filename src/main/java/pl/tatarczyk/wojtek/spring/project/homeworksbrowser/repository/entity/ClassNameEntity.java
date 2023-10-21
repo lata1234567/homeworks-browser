@@ -18,6 +18,10 @@ public class ClassNameEntity {
     public ClassNameEntity() {
     }
 
+    public ClassNameEntity(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
